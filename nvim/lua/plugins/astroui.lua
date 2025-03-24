@@ -95,8 +95,8 @@ return {
     "mvllow/modes.nvim",
     dependencies = { "rose-pine" },
     opts = function(_, opts)
-      local palette = require "rose-pine.palette"
       opts.line_opacity = 0.2
+      opts.set_cursor = false
     end,
   },
 

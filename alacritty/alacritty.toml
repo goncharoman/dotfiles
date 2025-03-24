@@ -27,7 +27,7 @@ italic = { style = "SemiBold Italic" }
 hide_when_typing = true
 
 [cursor]
-style = { shape = "Block", blinking = "Never" }
+thickness = 0.25
 
 [keyboard]
 bindings = [
