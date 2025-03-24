@@ -1,0 +1,318 @@
+command_timeout = 5000
+palette = "rose-pine"
+
+[time]
+disabled = true
+format = "[](fg:overlay)[ $time 󰴈 ]($style)[](fg:overlay) "
+style = "bg:overlay fg:rose"
+time_format = "%I:%M%P"
+use_12hr = true
+
+[username]
+disabled = true
+format = "[](fg:overlay)[ 󰧱 $user ]($style)[](fg:overlay) "
+show_always = true
+style_root = "bg:overlay fg:iris"
+style_user = "bg:overlay fg:iris"
+
+[character]
+success_symbol = "[](foam)"
+error_symbol = "[](love)"
+vimcmd_symbol = "[](foam)"
+vimcmd_replace_one_symbol = "[](iris)"
+vimcmd_replace_symbol = "[](iris)"
+vimcmd_visual_symbol = "[](gold)"
+
+[directory]
+read_only = " 󰌾"
+format = "[](fg:overlay)[ $path ]($style)[](fg:overlay) "
+style = "bg:overlay fg:foam"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[fill]
+style = "fg:overlay"
+symbol = " "
+
+[aws]
+symbol = "  "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[git_branch]
+disabled = false
+symbol = ""
+format = "[](fg:overlay)[ $symbol $branch ]($style)"
+style = "bg:overlay fg:love"
+
+[git_status]
+disabled = false
+style = "bg:overlay fg:love"
+format = '([⏽ ](bg:overlay fg:subtle)[$all_status$ahead_behind]($style))[](fg:overlay) '
+up_to_date = '[ ✓ ](bg:overlay fg:iris)'
+untracked = '[?\($count\) ](bg:overlay fg:gold)'
+stashed = '[\$ ](bg:overlay fg:iris)'
+modified = '[!\($count\) ](bg:overlay fg:gold)'
+renamed = '[»\($count\) ](bg:overlay fg:iris)'
+deleted = '[✘\($count\) ](style)'
+staged = '[++\($count\) ](bg:overlay fg:gold)'
+ahead = '[⇡\(${count}\) ](bg:overlay fg:foam)'
+diverged = '⇕[\[](bg:overlay fg:iris)[⇡\(${ahead_count}\)](bg:overlay fg:foam)[⇣\(${behind_count}\)](bg:overlay fg:rose)[\]](bg:overlay fg:iris)'
+behind = '[⇣\(${count}\) ](bg:overlay fg:rose)'
+
+[buf]
+symbol = " "
+
+[c]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version(-$name) )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[cmake]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[conda]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol$environment ]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[crystal]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[dart]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[docker_context]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol$context ]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[elixir]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[elm]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[fennel]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[git_commit]
+disabled = false
+format = '[](fg:overlay)[\($hash$tag\) ]($style)[](fg:overlay) '
+style = "bg:overlay fg:pine"
+tag_symbol = '  '
+
+[golang]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[haskell]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[haxe]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[hostname]
+disabled = false
+format = "[](fg:overlay)[$ssh_symbol$hostname]($style)[in ](bg:overlay fg:text)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+ssh_symbol = " "
+
+[java]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[julia]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[kotlin]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[lua]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[nim]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = "󰆥 "
+
+[nix_shell]
+disabled = false
+format = '[](fg:overlay)[ via](bg:overlay fg:text)[$symbol$state( \($name\))]($style)[](fg:overlay) '
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[nodejs]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[ocaml]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[package]
+disabled = false
+format = "[](fg:overlay)[ is](bg:overlay fg:text)[ $symbol$version ]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = "󰏗 "
+
+[perl]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[php]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[python]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[rlang]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = "󰟔 "
+
+[ruby]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[rust]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = "󱘗 "
+
+[scala]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[swift]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[zig]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[gradle]
+disabled = false
+format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+style = "bg:overlay fg:pine"
+symbol = " "
+
+[palettes.rose-pine]
+text = "#e0def4"
+subtle = "#908caa"
+overlay = '#44415a'
+love = '#eb6f92'
+gold = '#f6c177'
+rose = '#ea9a97'
+pine = '#499FC1'
+foam = '#9ccfd8'
+iris = '#c4a7e7'

@@ -1,0 +1,50 @@
+[general]
+import = ["~/.config/alacritty/themes/rose-pine.toml"]
+
+[terminal]
+shell = { program = "/opt/homebrew/bin/fish", args = [
+  "-ic",
+  "zellij attach --index 0 || zellij",
+] }
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+dimensions = { columns = 120, lines = 60 }
+padding = { x = 10, y = 10 }
+decorations = "Buttonless"
+opacity = 0.92
+blur = true
+option_as_alt = "Both"
+
+[font]
+size = 11.25
+normal = { family = "RobotoMono Nerd Font", style = "SemiBold" }
+italic = { style = "SemiBold Italic" }
+
+[mouse]
+hide_when_typing = true
+
+[cursor]
+style = { shape = "Block", blinking = "Never" }
+
+[keyboard]
+bindings = [
+  { key = "Left", mods = "Alt", chars = "\u001bb" },
+  { key = "Right", mods = "Alt", chars = "\u001bf" },
+  { key = "Left", mods = "Command", chars = "\u001bOH" },
+  { key = "Right", mods = "Command", chars = "\u001bOF" },
+  { key = "Back", mods = "Command", chars = "\u0015" },
+  { key = "Back", mods = "Alt", chars = "\u001b\u007f" },
+]
+
+[[hints.enabled]]
+regex = "[^ ]+\\.rs:\\d+:\\d+"
+command = { program = "code", args = ["--goto"] }
+mouse = { enabled = true }
+
+[debug]
+render_timer = false
+persistent_logging = false
+log_level = "Off"
