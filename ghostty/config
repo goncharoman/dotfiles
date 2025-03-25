@@ -23,6 +23,8 @@ cursor-style = block
 cursor-style-blink = false
 adjust-cursor-thickness = 2
 
+macos-option-as-alt = true
+
 mouse-hide-while-typing = true
 copy-on-select = false
 
