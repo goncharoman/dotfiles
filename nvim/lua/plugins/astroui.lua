@@ -502,6 +502,7 @@ return {
     },
   },
 
+  ---@type LazySpec
   {
     "folke/noice.nvim",
     event = "VeryLazy",
