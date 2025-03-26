@@ -14,7 +14,7 @@ font-style-italic = "SemiBold Italic"
 font-style-bold = "Bold"
 font-style-bold-italic = "Bold Italic"
 font-feature = zero ss01 cv11
-font-size = 11.25
+font-size = 11
 font-thicken = true
 alpha-blending = native
 
