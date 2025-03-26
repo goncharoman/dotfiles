@@ -7,7 +7,7 @@ return {
     opts = {
       -- change colorscheme
       -- colorscheme = "catppuccin-mocha",
-      colorscheme = "rose-pine",
+      colorscheme = "catppuccin-mocha",
       -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
       -- Icons can be configured throughout the interface
       icons = {
@@ -46,57 +46,56 @@ return {
 
   ---@type LazySpec
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    opts = function(_, opts)
-      opts.variant = "moon"
-      opts.enable = {
-        terminal = true,
-        legacy_highlights = true,
-      }
-      opts.styles = {
-        bold = false,
-        italic = false,
-        transparency = false,
-      }
-      opts.palette = {
-        moon = {
-          pine = "#59A6C5",
-          lfoam = "#D3EAEE",
+    "catppuccin",
+    opts = {
+      term_colors = false,
+      integrations = {
+        which_key = true,
+        neotree = true,
+        notify = true,
+        mason = true,
+        treesitter = true,
+        telescope = {
+          enabled = true,
         },
-      }
-      opts.highlight_groups = {
-        ["WinBar"] = { bg = "base", fg = "subtle" },
-        ["WinBarNC"] = { bg = "base", fg = "muted" },
-        ["@constant.builtin.python"] = { fg = "love" },
-        ["@variable.builtin"] = { italic = true },
-        ["@variable.parameter"] = { italic = true },
-        ["@variable.member"] = { fg = "lfoam", italic = true },
-        ["@constructor.python"] = { fg = "foam", italic = false },
-        ["@keyword"] = { italic = true },
-        ["@keyword.operator"] = { fg = "pine", italic = true },
-        ["@keyword.function"] = { fg = "pine", italic = true },
-        ["@keyword.import"] = { fg = "pine", italic = true },
-        ["@function.method.call.python"] = { fg = "rose" },
-        ["@keyword.repeat.python"] = { fg = "pine", italic = true },
-        ["@keyword.exception.python"] = { fg = "pine", italic = true },
-        ["@keyword.conditional.python"] = { fg = "pine", italic = true },
-        ["@keyword.return"] = { italic = true },
-        ["@lsp.type.decorator.python"] = { italic = true },
-        ["@lsp.type.class.python"] = { fg = "foam" },
-        ["@module.python"] = { fg = "lfoam" },
-        ["@attribute.python"] = { fg = "iris", italic = true },
-      }
-    end,
+      },
+      highlight_overrides = {
+        all = function(colors)
+          return {
+            ["@variable.builtin"] = { fg = colors.red, style = { "italic" } },
+            ["@variable.parameter"] = { fg = colors.maroon, style = { "italic" } },
+            ["@module.python"] = {},
+            ["@constructor.python"] = { fg = colors.peach },
+            ["@keyword"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.operator"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.function"] = { style = { "italic" } },
+            ["@keyword.import"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.repeat.python"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.type.python"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.coroutine.python"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.exception"] = { fg = colors.mauve, style = { "italic" } },
+            ["@keyword.return"] = { style = { "italic" } },
+            ["@attribute.python"] = { fg = colors.peach, style = { "italic" } },
+          }
+        end,
+      },
+    },
   },
 
   ---@type LazySpec
   {
     "mvllow/modes.nvim",
-    dependencies = { "rose-pine" },
+    dependencies = { "catppuccin" },
     opts = function(_, opts)
+      local palette = require("catppuccin.palettes").get_palette "mocha"
       opts.line_opacity = 0.2
       opts.set_cursor = false
+      opts.colors = {
+        insert = palette.teal,
+        visual = palette.lavender,
+        delete = palette.red,
+        copy = palette.yellow,
+      }
     end,
   },
 
@@ -112,41 +111,41 @@ return {
   ---@type LazySpec
   {
     "rebelot/heirline.nvim",
-    dependencies = { "rose-pine" },
+    dependencies = { "catppuccin" },
     opts = function(_, opts)
       local utils = require "heirline.utils"
       local conditions = require "heirline.conditions"
-      local palette = require "rose-pine.palette"
+      local palette = require("catppuccin.palettes").get_palette "mocha"
 
       vim.api.nvim_set_hl(0, "HeirlineTablineActiveTab", { fg = palette.text, bg = palette.base })
-      vim.api.nvim_set_hl(0, "HeirlineTablineInactiveTab", { fg = palette.muted, bg = palette.overlay })
+      vim.api.nvim_set_hl(0, "HeirlineTablineInactiveTab", { fg = palette.subtext0, bg = palette.surface0 })
       vim.api.nvim_set_hl(0, "HeirlineTabline", { link = "StatusLine" })
-      vim.api.nvim_set_hl(0, "HeirlineTablineTabCloseButton", { fg = palette.love })
-      vim.api.nvim_set_hl(0, "HeirlineStatusline", { fg = palette.text, bg = palette.surface })
-      vim.api.nvim_set_hl(0, "HeirlineStatuslineLSP", { fg = palette.subtle })
-      vim.api.nvim_set_hl(0, "HeirlineStatuslineSep", { fg = palette.muted })
+      vim.api.nvim_set_hl(0, "HeirlineTablineTabCloseButton", { fg = palette.red })
+      vim.api.nvim_set_hl(0, "HeirlineStatusline", { fg = palette.text, bg = palette.surface0 })
+      vim.api.nvim_set_hl(0, "HeirlineStatuslineLSP", { fg = palette.subtext0 })
+      vim.api.nvim_set_hl(0, "HeirlineStatuslineSep", { fg = palette.overlay0 })
 
       local modecolors = {
-        n = palette.pine, -- normal
-        i = palette.foam, -- insert
-        v = palette.iris, -- visual
-        V = palette.iris, -- visual line
-        [""] = palette.iris, -- visual block
-        c = palette.subtle, -- command
-        no = palette.foam,
-        s = palette.gold, -- select
-        S = palette.gold, -- select line
-        [""] = palette.gold, -- select block
-        ic = palette.foam,
-        R = palette.iris, -- replace
-        Rv = palette.iris, -- virtual replace
-        cv = palette.subtle,
-        ce = palette.subtle,
-        r = palette.subtle,
-        rm = palette.subtle,
-        ["r?"] = palette.subtle,
-        ["!"] = palette.subtle,
-        t = palette.leaf, -- terminal job
+        n = palette.blue,
+        i = palette.sapphire,
+        v = palette.yellow,
+        [""] = palette.yellow,
+        V = palette.yellow,
+        c = palette.pink,
+        no = palette.blue,
+        s = palette.peach,
+        S = palette.peach,
+        [""] = palette.peach,
+        ic = palette.meroon,
+        R = palette.lavender,
+        Rv = palette.lavender,
+        cv = palette.blue,
+        ce = palette.blue,
+        r = palette.red,
+        rm = palette.red,
+        ["r?"] = palette.red,
+        ["!"] = palette.blue,
+        t = palette.blue,
       }
 
       local components = {

@@ -1,5 +1,8 @@
 set fish_greeting
 
+# to apply theme:
+# fish_config theme choose catppuccin
+
 # paths
 set -g fish_user_paths /opt/homebrew/bin $fish_user_paths
 set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths

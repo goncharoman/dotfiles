@@ -3,7 +3,7 @@ term = xterm-256color
 command = /opt/homebrew/bin/fish -ic "zellij attach --create main"
 title = "👻"
 
-theme = rose-pine-moon
+theme = catppuccin
 
 background-opacity = 0.95
 background-blur = true
