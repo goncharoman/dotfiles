@@ -88,7 +88,7 @@ Windows = "󰍲 "
 disabled = false
 symbol = ""
 format = "[](fg:overlay)[ $symbol $branch ]($style)"
-style = "bg:overlay fg:love"
+style = "bg:overlay fg:iris"
 
 [git_status]
 disabled = false
