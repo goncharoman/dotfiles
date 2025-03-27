@@ -168,7 +168,7 @@ return {
           end,
 
           mode = {
-            provider = function() return "   󰣙   " end, -- or 󰣙 / 󰣘
+            provider = function() return "   󰊠   " end, -- or 󰣙 / 󰣘
             hl = function(self) return { fg = modecolors[vim.fn.mode(1):sub(1, 1)] } end,
             update = {
               "ModeChanged",
