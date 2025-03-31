@@ -1,6 +1,6 @@
 term = xterm-256color
 
-command = /opt/homebrew/bin/fish -ic "zellij attach --create main"
+command = /opt/homebrew/bin/fish -lic zellij
 title = "👻"
 
 theme = rose-pine-moon
