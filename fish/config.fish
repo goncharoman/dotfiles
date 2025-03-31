@@ -1,10 +1,15 @@
 set fish_greeting
 
-# paths
-set -g fish_user_paths /opt/homebrew/bin $fish_user_paths
-set -g fish_user_paths /opt/homebrew/sbin $fish_user_paths
-set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
-set -g fish_user_paths /Users/roman/.local/share/pypoetry/bin $fish_user_paths
+# preload ~/.profile
+if test -e $HOME/.profile
+  source $HOME/.profile
+end
+
+# homebrew home
+if test -z "HOMEBREW_HOME"
+  set -gx HOMEBREW_HOME /opt/homebrew
+end
+
 
 # XDG
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -50,8 +55,15 @@ set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 # homebrew config
 set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
 
+# paths
+set -g fish_user_paths $HOMEBREW_HOME/bin $fish_user_paths
+set -g fish_user_paths $HOMEBREW_HOME/sbin $fish_user_paths
+set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+set -g fish_user_paths $POETRY_HOME/bin $fish_user_paths
+
+
 starship init fish | source
 pyenv init - fish | source
-goenv init - | source
+goenv init - fish | source
 
 ssh-add --apple-load-keychain &> /dev/null
