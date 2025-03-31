@@ -4,6 +4,7 @@ set fish_greeting
 set -g fish_user_paths /opt/homebrew/bin $fish_user_paths
 set -g fish_user_paths /opt/homebrew/sbin $fish_user_paths
 set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+set -g fish_user_paths /Users/roman/.local/share/pypoetry/bin $fish_user_paths
 
 # XDG
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -40,6 +41,11 @@ set -gx TERMINFO_DIRS $TERMINFO:/usr/share/terminfo
 
 # w3m
 set -gx W3M_DIR $XDG_DATA_HOME/w3m
+
+# poetry
+set -gx POETRY_HOME $XDG_DATA_HOME/pypoetry
+set -gx POETRY_CONFIG_DIR $XDG_CONFIG_HOME/pypoetry
+set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 
 # homebrew config
 set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
