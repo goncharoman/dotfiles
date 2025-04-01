@@ -5,11 +5,6 @@ if test -e $HOME/.profile
   source $HOME/.profile
 end
 
-# homebrew home
-if test -z "HOMEBREW_HOME"
-  set -gx HOMEBREW_HOME /opt/homebrew
-end
-
 
 # XDG
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -48,18 +43,23 @@ set -gx TERMINFO_DIRS $TERMINFO:/usr/share/terminfo
 set -gx W3M_DIR $XDG_DATA_HOME/w3m
 
 # poetry
+# create a link to $XDG_DATA_HOME/pypoetry/bin/poetry in $XDG_DATA_HOME/bin
 set -gx POETRY_HOME $XDG_DATA_HOME/pypoetry
 set -gx POETRY_CONFIG_DIR $XDG_CONFIG_HOME/pypoetry
 set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 
 # homebrew config
 set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
+if test -z "HOMEBREW_HOME"
+  set -gx HOMEBREW_HOME /opt/homebrew
+end
 
 # paths
+set -g fish_user_paths $XDG_DATA_HOME/bin $fish_user_paths
 set -g fish_user_paths $HOMEBREW_HOME/bin $fish_user_paths
 set -g fish_user_paths $HOMEBREW_HOME/sbin $fish_user_paths
 set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
-set -g fish_user_paths $POETRY_HOME/bin $fish_user_paths
+set -g fish_user_paths $GOENV_ROOT/bin $fish_user_paths
 
 
 starship init fish | source
