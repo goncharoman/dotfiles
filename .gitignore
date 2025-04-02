@@ -1,4 +1,13 @@
+# nvim
 nvim/lazy-lock.json
+
+# vim
 vim/viminfo
 vim/.netrwhist
+
+# git
 git/user
+
+# poetry
+pypoetry/*
+!pypoetry/config.toml
