@@ -11,3 +11,7 @@ git/user
 # poetry
 pypoetry/*
 !pypoetry/config.toml
+
+# containers (aka podman)
+containers/*
+!containers/containers.conf
