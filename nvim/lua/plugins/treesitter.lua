@@ -18,6 +18,7 @@ return {
       "go",
       "make",
       "ssh_config",
+      "kdl",
     })
     opts.sync_install = true
   end,
