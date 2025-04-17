@@ -50,6 +50,9 @@ return {
           formatterMode = "typestyle",
         },
       },
+      clangd = {
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
+      },
     },
   },
   -- customize how language servers are attached
