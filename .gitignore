@@ -1,3 +1,6 @@
+# backup
+**/*.bak
+
 # nvim
 nvim/lazy-lock.json
 

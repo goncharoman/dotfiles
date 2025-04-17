@@ -6,9 +6,16 @@ return {
     ---@type AstroUIOpts
     opts = {
       -- change colorscheme
-      -- colorscheme = "catppuccin-mocha",
       colorscheme = "rose-pine",
       -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
+      highlights = {
+        init = { -- this table overrides highlights in all themes
+          -- Normal = { bg = "#000000" },
+        },
+        astrodark = { -- a table of overrides/changes when applying the astrotheme theme
+          -- Normal = { bg = "#000000" },
+        },
+      },
       -- Icons can be configured throughout the interface
       icons = {
         -- configure the loading of the lsp in the status line
@@ -28,20 +35,26 @@ return {
 
   ---@type LazySpec
   {
-    "goolord/alpha-nvim",
-    opts = function(_, opts)
-      opts.section.header.val = {
-        [[                                   ]],
-        [[ ███╗   ██╗██╗   ██╗██╗███╗   ███╗ ]],
-        [[ ████╗  ██║██║   ██║██║████╗ ████║ ]],
-        [[ ██╔██╗ ██║██║   ██║██║██╔████╔██║ ]],
-        [[ ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
-        [[ ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
-        [[ ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
-        [[                                   ]],
-      }
-      return opts
-    end,
+    "folke/snacks.nvim",
+    opts = {
+      dashboard = {
+        preset = {
+          header = table.concat({
+            [[                                   ]],
+            [[ ███╗   ██╗██╗   ██╗██╗███╗   ███╗ ]],
+            [[ ████╗  ██║██║   ██║██║████╗ ████║ ]],
+            [[ ██╔██╗ ██║██║   ██║██║██╔████╔██║ ]],
+            [[ ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
+            [[ ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
+            [[ ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
+            [[                                   ]],
+          }, "\n"),
+        },
+      },
+      notifier = {
+        level = vim.log.levels.INFO,
+      },
+    },
   },
 
   ---@type LazySpec
@@ -99,16 +112,6 @@ return {
       opts.set_cursor = false
     end,
   },
-
-  ---@type LazySpec
-  {
-    "rcarriga/nvim-notify",
-    opts = function(_, opts)
-      opts.level = vim.log.levels.INFO
-      opts.fps = 60
-    end,
-  },
-
   ---@type LazySpec
   {
     "rebelot/heirline.nvim",
@@ -155,7 +158,7 @@ return {
 
           border = {
             provider = " ",
-            hl = function(self) return { bg = modecolors[vim.fn.mode(1):sub(1, 1)] } end,
+            hl = function() return { bg = modecolors[vim.fn.mode(1):sub(1, 1)] } end,
           },
           fill = { provider = "%=" },
 
@@ -169,7 +172,7 @@ return {
 
           mode = {
             provider = function() return "   󰊠   " end, -- or 󰣙 / 󰣘
-            hl = function(self) return { fg = modecolors[vim.fn.mode(1):sub(1, 1)] } end,
+            hl = function() return { fg = modecolors[vim.fn.mode(1):sub(1, 1)] } end,
             update = {
               "ModeChanged",
               pattern = "*:*",
@@ -187,7 +190,7 @@ return {
               hl = { bold = true },
             },
             {
-              condition = function(self) return vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" end,
+              condition = function() return vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" end,
               provider = "    ",
               hl = "HeirlineStatuslineSep",
             },
@@ -372,8 +375,7 @@ return {
                 {
                   condition = function(self) return vim.api.nvim_get_option_value("modified", { buf = self.bufnr }) end,
                   provider = "  ",
-                  hl = function(self) end,
-                  e,
+                  hl = function() end,
                 },
                 {
                   condition = function(self)
@@ -519,11 +521,11 @@ return {
           },
         },
         presets = {
-          bottom_search = false, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = utils.is_available "inc-rename.nvim", -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
+          bottom_search = false,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = utils.is_available "inc-rename.nvim",
+          lsp_doc_border = false,
         },
       })
     end,
@@ -546,14 +548,28 @@ return {
         opts = function(_, opts)
           local noice_opts = require("astrocore").plugin_opts "noice.nvim"
           -- disable the necessary handlers in AstroLSP
+          if not opts.defaults then opts.defaults = {} end
+          -- TODO: remove lsp_handlers when dropping support for AstroNvim v4
           if not opts.lsp_handlers then opts.lsp_handlers = {} end
           if vim.tbl_get(noice_opts, "lsp", "hover", "enabled") ~= false then
+            opts.defaults.hover = false
             opts.lsp_handlers["textDocument/hover"] = false
           end
           if vim.tbl_get(noice_opts, "lsp", "signature", "enabled") ~= false then
+            opts.defaults.signature_help = false
             opts.lsp_handlers["textDocument/signatureHelp"] = false
             if not opts.features then opts.features = {} end
             opts.features.signature_help = false
+          end
+        end,
+      },
+      {
+        "rebelot/heirline.nvim",
+        optional = true,
+        opts = function(_, opts)
+          local noice_opts = require("astrocore").plugin_opts "noice.nvim"
+          if vim.tbl_get(noice_opts, "lsp", "progress", "enabled") ~= false then -- check if lsp progress is enabled
+            opts.statusline[9] = require("astroui.status").component.lsp { lsp_progress = false }
           end
         end,
       },

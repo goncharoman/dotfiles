@@ -1,7 +1,12 @@
 ---@type LazySpec
 return {
 
-  { "max397574/better-escape.nvim", enabled = false },
+  "andweeb/presence.nvim",
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function() require("lsp_signature").setup() end,
+  },
 
   {
     "L3MON4D3/LuaSnip",

@@ -1,9 +1,10 @@
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
-  opts = function(_, config)
+  opts = function(_, opts)
     local null_ls = require "null-ls"
-    config.sources = {
+
+    opts.sources = {
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.diagnostics.djlint,
@@ -17,6 +18,5 @@ return {
         extra_args = { "--dialect", "ansi" },
       },
     }
-    return config
   end,
 }
