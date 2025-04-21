@@ -1,1 +1,1 @@
-vim.highlight.priorities.semantic_tokens = 75
+vim.hl.priorities.semantic_tokens = 75
