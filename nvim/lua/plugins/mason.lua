@@ -1,25 +1,24 @@
 ---@type LazySpec
 return {
-  -- use mason-tool-installer for automatically installing Mason packages
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = {
-      -- Make sure to use the names found in `:Mason`
       ensure_installed = {
         -- language servers
         "lua-language-server",
         "basedpyright",
-        "ruff",
+        { "ruff", version = "0.11.5" },
         "taplo",
         "docker-compose-language-service",
         "dockerfile-language-server",
         "clangd",
         "tinymist",
+        -- linters
+        "mypy",
 
         -- formatters
         "stylua",
         "prettier",
-        "mypy",
         "djlint",
 
         -- debuggers
@@ -27,6 +26,11 @@ return {
 
         -- any other package
         "tree-sitter-cli",
+      },
+      integrations = {
+        ["mason-lspconfig"] = true,
+        ["mason-null-ls"] = true,
+        ["mason-nvim-dap"] = true,
       },
     },
   },
