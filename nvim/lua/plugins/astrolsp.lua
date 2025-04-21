@@ -90,10 +90,39 @@ return {
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
-        -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
+        gd = {
+          function() require("snacks").picker.lsp_definitions() end,
+          desc = "Definition of current symbol",
+          cond = "textDocument/declaration",
+        },
         gD = {
-          function() vim.lsp.buf.declaration() end,
+          function() require("snacks").picker.lsp_declarations() end,
           desc = "Declaration of current symbol",
+          cond = "textDocument/declaration",
+        },
+        gr = {
+          function() require("snacks").picker.lsp_references() end,
+          desc = "References of current symbol",
+          cond = "textDocument/declaration",
+        },
+        gI = {
+          function() require("snacks").picker.lsp_implementations() end,
+          desc = "Implementation of current symbol",
+          cond = "textDocument/declaration",
+        },
+        gy = {
+          function() require("snacks").picker.lsp_type_definitions() end,
+          desc = "Type deifinition of current symbol",
+          cond = "textDocument/declaration",
+        },
+        ["<Leader>ss"] = {
+          function() require("snacks").picker.lsp_symbols() end,
+          desc = "LSP symbols",
+          cond = "textDocument/declaration",
+        },
+        ["<Leader>sS"] = {
+          function() require("snacks").picker.lsp_workspace_symbols() end,
+          desc = "LSP workspace symbols",
           cond = "textDocument/declaration",
         },
         ["<Leader>uY"] = {
