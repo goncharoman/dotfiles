@@ -11,12 +11,6 @@ return {
       null_ls.builtins.diagnostics.mypy.with {
         prefer_local = ".venv/bin",
       },
-      null_ls.builtins.diagnostics.sqlfluff.with {
-        extra_args = { "--dialect", "ansi" },
-      },
-      null_ls.builtins.formatting.sqlfluff.with {
-        extra_args = { "--dialect", "ansi" },
-      },
     }
   end,
 }
