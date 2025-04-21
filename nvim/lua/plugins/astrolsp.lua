@@ -54,6 +54,13 @@ return {
       clangd = {
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
       },
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      },
     },
     -- customize how language servers are attached
     handlers = {},

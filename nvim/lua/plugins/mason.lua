@@ -13,6 +13,8 @@ return {
         "dockerfile-language-server",
         "clangd",
         "tinymist",
+        "gopls",
+
         -- linters
         "mypy",
 
