@@ -4,20 +4,37 @@ return {
   opts = {
     ensure_installed = {
       "lua",
+      "luadoc",
+
       "vim",
-      "python",
-      "toml",
+      "vimdoc",
+
+      "bash",
+      "fish",
+
+      "csv",
+
+      "markdown",
+      "markdown_inline",
+
       "yaml",
-      "sql",
+      "toml",
       "json",
-      "c",
+      "jsonc",
+
+      "sql",
+
       "gitignore",
-      "helm",
-      "dockerfile",
-      "go",
-      "make",
+      "gitcommit",
+      "git_config",
+      "git_rebase",
+      "diff",
+
+      "ini",
       "ssh_config",
       "kdl",
+
+      "make",
     },
     sync_install = true,
   },

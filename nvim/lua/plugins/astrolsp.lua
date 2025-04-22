@@ -17,7 +17,6 @@ return {
         allow_filetypes = { -- enable format on save for specified filetypes only
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
-          "python", -- disable autoformatting for python (see python augroup)
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
@@ -29,37 +28,10 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      basedpyright = {
-        settings = {
-          basedpyright = {
-            disableOrganizeImports = true,
-            analisis = {
-              typeCheckingMode = "basic",
-              diagnosticMode = "workspace",
-              autoImportCompletions = true,
-              useLibraryCodeForTypes = true,
-            },
-          },
-        },
-      },
-      ruff = {
-        cmd_env = { RUFF_TRACE = "messages" },
-        init_options = { logLevel = "error" },
-      },
       tinymist = {
         settings = {
           formatterMode = "typestyle",
         },
-      },
-      clangd = {
-        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
-      },
-      gopls = {
-        analyses = {
-          unusedparams = true,
-        },
-        staticcheck = true,
-        gofumpt = true,
       },
     },
     -- customize how language servers are attached
@@ -67,14 +39,6 @@ return {
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
       -- first key is the `augroup` to add the auto commands to (:h augroup)
-      python = {
-        cond = function() return vim.bo.ft == "python" end,
-        {
-          event = { "BufWritePre" },
-          desc = "Ruff auto-'fixAll' on save",
-          callback = function(_) vim.lsp.buf.code_action { context = { only = { "source.fixAll" } }, apply = true } end,
-        },
-      },
       lsp_codelens_refresh = {
         -- Optional condition to create/delete auto command group
         -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`

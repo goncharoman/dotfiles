@@ -1,13 +1,15 @@
----@type LazySpec
 return {
 
-  "andweeb/presence.nvim",
+  { "andweeb/presence.nvim" },
+
+  ---@type LazySpec
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function() require("lsp_signature").setup() end,
   },
 
+  ---@type LazySpec
   {
     "L3MON4D3/LuaSnip",
     config = function(plugin, opts)
@@ -18,6 +20,7 @@ return {
     end,
   },
 
+  ---@type LazySpec
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)
@@ -48,6 +51,7 @@ return {
     end,
   },
 
+  ---@type LazySpec
   {
     "kylechui/nvim-surround",
     version = "*",
@@ -55,6 +59,7 @@ return {
     opts = {},
   },
 
+  ---@type LazySpec
   {
     "sindrets/diffview.nvim",
     opts = function(_, opts)
@@ -126,5 +131,51 @@ return {
         },
       }
     end,
+  },
+
+  ---@type LazySpec
+  {
+    "b0o/SchemaStore.nvim",
+    lazy = true,
+    specs = {
+      ---@type LazySpec
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opts = function(_, opts)
+          opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+            "yaml-language-server",
+            "json-lsp",
+          })
+        end,
+      },
+      ---@type LazySpec
+      {
+        "AstroNvim/astrolsp",
+        optional = true,
+        ---@type AstroLSPOpts
+        opts = {
+          ---@diagnostic disable: missing-fields
+          config = {
+            yamlls = {
+              on_new_config = function(config)
+                config.settings.yaml.schemas = vim.tbl_deep_extend(
+                  "force",
+                  config.settings.yaml.schemas or {},
+                  require("schemastore").yaml.schemas()
+                )
+              end,
+              settings = { yaml = { schemaStore = { enable = false, url = "" } } },
+            },
+            jsonls = {
+              on_new_config = function(config)
+                if not config.settings.json.schemas then config.settings.json.schemas = {} end
+                vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+              end,
+              settings = { json = { validate = { enable = true } } },
+            },
+          },
+        },
+      },
+    },
   },
 }

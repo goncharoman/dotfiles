@@ -5,26 +5,18 @@ return {
     opts = {
       ensure_installed = {
         -- language servers
-        "lua-language-server",
-        "basedpyright",
-        { "ruff", version = "0.11.5" },
+        "yaml-language-server",
+        "bash-language-server",
+        "json-lsp",
         "taplo",
-        "docker-compose-language-service",
-        "dockerfile-language-server",
-        "clangd",
         "tinymist",
-        "gopls",
 
         -- linters
-        "mypy",
+        "shellcheck",
 
         -- formatters
-        "stylua",
-        "prettier",
-        "djlint",
-
-        -- debuggers
-        "debugpy",
+        "prettierd",
+        "shfmt",
 
         -- any other package
         "tree-sitter-cli",

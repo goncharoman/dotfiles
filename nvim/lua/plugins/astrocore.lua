@@ -19,15 +19,9 @@ return {
     },
     -- passed to `vim.filetype.add`
     filetypes = {
-      extension = {
-        ["j2"] = "django",
-        ["django"] = "django",
-      },
+      extension = {},
       filename = {},
-      pattern = {
-        ["compose.*%.ya?ml"] = "yaml.docker-compose",
-        ["docker%-compose.*%.ya?ml"] = "yaml.docker-compose",
-      },
+      pattern = {},
     },
     -- vim options can be configured here
     options = {
