@@ -51,8 +51,13 @@ return {
           cond = function() return vim.bo.ft == "python" end,
           {
             event = { "BufWritePre" },
-            desc = "Ruff auto-'fixAll' on save",
-            callback = function(_) vim.lsp.buf.code_action { context = { only = { "source.fixAll" } }, apply = true } end,
+            desc = "Ruff fixAll and format on save",
+            callback = function(_)
+              -- run fixall code action
+              vim.lsp.buf.code_action { context = { only = { "source.fixAll.ruff" } }, apply = true } ---@diagnostic disable-line: assign-type-mismatch
+              -- format code
+              vim.lsp.buf.format { async = vim.bo.filetype ~= "python" }
+            end,
           },
         },
       },
