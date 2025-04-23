@@ -1,6 +1,6 @@
----@type LazySpec
 return {
 
+  ---@type LazySpec
   {
     "AstroNvim/astroui",
     ---@type AstroUIOpts
@@ -36,6 +36,7 @@ return {
   ---@type LazySpec
   {
     "folke/snacks.nvim",
+    ---@type snacks.Config
     opts = {
       dashboard = {
         preset = {
@@ -112,6 +113,7 @@ return {
       opts.set_cursor = false
     end,
   },
+
   ---@type LazySpec
   {
     "rebelot/heirline.nvim",

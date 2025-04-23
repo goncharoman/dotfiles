@@ -60,50 +60,7 @@ return {
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
-      n = {
-        gd = {
-          function() require("snacks").picker.lsp_definitions() end,
-          desc = "Definition of current symbol",
-          cond = "textDocument/declaration",
-        },
-        gD = {
-          function() require("snacks").picker.lsp_declarations() end,
-          desc = "Declaration of current symbol",
-          cond = "textDocument/declaration",
-        },
-        gr = {
-          function() require("snacks").picker.lsp_references() end,
-          desc = "References of current symbol",
-          cond = "textDocument/declaration",
-        },
-        gI = {
-          function() require("snacks").picker.lsp_implementations() end,
-          desc = "Implementation of current symbol",
-          cond = "textDocument/declaration",
-        },
-        gy = {
-          function() require("snacks").picker.lsp_type_definitions() end,
-          desc = "Type deifinition of current symbol",
-          cond = "textDocument/declaration",
-        },
-        ["<Leader>ss"] = {
-          function() require("snacks").picker.lsp_symbols() end,
-          desc = "LSP symbols",
-          cond = "textDocument/declaration",
-        },
-        ["<Leader>sS"] = {
-          function() require("snacks").picker.lsp_workspace_symbols() end,
-          desc = "LSP workspace symbols",
-          cond = "textDocument/declaration",
-        },
-        ["<Leader>uY"] = {
-          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-          desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client)
-            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
-          end,
-        },
-      },
+      n = {},
     },
   },
 }

@@ -1,5 +1,6 @@
 return {
 
+  ---@type LazySpec
   { "andweeb/presence.nvim" },
 
   ---@type LazySpec
