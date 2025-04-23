@@ -172,7 +172,7 @@ tag_symbol = '  '
 disabled = false
 format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
 style = "bg:overlay fg:pine"
-symbol = " "
+symbol = "󰟓 "
 
 [haskell]
 disabled = false
