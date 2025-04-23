@@ -533,6 +533,7 @@ return {
       })
     end,
     specs = {
+      ---@type LazySpec
       {
         "nvim-treesitter/nvim-treesitter",
         opts = function(_, opts)
@@ -544,6 +545,7 @@ return {
           end
         end,
       },
+      ---@type LazySpec
       {
         "AstroNvim/astrolsp",
         optional = true,
@@ -566,6 +568,7 @@ return {
           end
         end,
       },
+      ---@type LazySpec
       {
         "rebelot/heirline.nvim",
         optional = true,
@@ -576,6 +579,7 @@ return {
           end
         end,
       },
+      ---@type LazySpec
       {
         "folke/edgy.nvim",
         optional = true,
