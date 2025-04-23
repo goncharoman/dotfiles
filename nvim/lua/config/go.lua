@@ -7,54 +7,72 @@ return {
     opts = {
       ---@diagnostic disable: missing-fields
       config = {
-        opts = {
-          ---@diagnostic disable-next-line: missing-fields
-          config = {
+        gopls = {
+          settings = {
             gopls = {
-              settings = {
-                gopls = {
-                  analyses = {
-                    ST1003 = true,
-                    fieldalignment = false,
-                    fillreturns = true,
-                    nilness = true,
-                    nonewvars = true,
-                    shadow = true,
-                    undeclaredname = true,
-                    unreachable = true,
-                    unusedparams = true,
-                    unusedwrite = true,
-                    useany = true,
-                  },
-                  codelenses = {
-                    generate = true, -- show the `go generate` lens.
-                    regenerate_cgo = true,
-                    test = true,
-                    tidy = true,
-                    upgrade_dependency = true,
-                    vendor = true,
-                  },
-                  hints = {
-                    assignVariableTypes = true,
-                    compositeLiteralFields = true,
-                    compositeLiteralTypes = true,
-                    constantValues = true,
-                    functionTypeParameters = true,
-                    parameterNames = true,
-                    rangeVariableTypes = true,
-                  },
-                  buildFlags = { "-tags", "integration" },
-                  completeUnimported = true,
-                  diagnosticsDelay = "500ms",
-                  gofumpt = true,
-                  matcher = "Fuzzy",
-                  semanticTokens = true,
-                  staticcheck = true,
-                  symbolMatcher = "fuzzy",
-                  usePlaceholders = true,
-                },
+              analyses = {
+                ST1003 = true,
+                fieldalignment = false,
+                fillreturns = true,
+                nilness = true,
+                nonewvars = true,
+                shadow = true,
+                undeclaredname = true,
+                unreachable = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
               },
+              codelenses = {
+                generate = true, -- show the `go generate` lens.
+                regenerate_cgo = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              buildFlags = { "-tags", "integration" },
+              completeUnimported = true,
+              diagnosticsDelay = "500ms",
+              gofumpt = true,
+              matcher = "Fuzzy",
+              semanticTokens = true,
+              staticcheck = true,
+              symbolMatcher = "fuzzy",
+              usePlaceholders = true,
             },
+          },
+        },
+      },
+      autocmds = {
+        go = {
+          cond = function() return vim.bo.ft == "go" end,
+          {
+            event = { "BufWritePre" },
+            desc = "Organize imports and format",
+            callback = function(_)
+              local params = vim.lsp.util.make_range_params(0, "utf-16")
+              params.context = { only = { "source.organizeImports" } }
+              local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+              for cid, res in pairs(result or {}) do
+                for _, r in pairs(res.result or {}) do
+                  if r.edit then
+                    local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                    vim.lsp.util.apply_workspace_edit(r.edit, enc)
+                  end
+                end
+              end
+              vim.lsp.buf.format { async = false }
+            end,
           },
         },
       },
