@@ -55,6 +55,7 @@ return {
       notifier = {
         level = vim.log.levels.INFO,
       },
+      image = { enabled = false },
     },
   },
 
