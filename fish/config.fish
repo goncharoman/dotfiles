@@ -2,9 +2,8 @@ set fish_greeting
 
 # preload ~/.profile
 if test -e $HOME/.profile
-  source $HOME/.profile
+    source $HOME/.profile
 end
-
 
 # XDG
 set -gx XDG_CONFIG_HOME $HOME/.config
@@ -15,8 +14,8 @@ set -gx XDG_CACHE_HOME $HOME/.cache
 
 # Homebrew 
 set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
-if test -z "HOMEBREW_HOME"
-  set -gx HOMEBREW_HOME /opt/homebrew
+if test -z HOMEBREW_HOME
+    set -gx HOMEBREW_HOME /opt/homebrew
 end
 
 # go
@@ -30,6 +29,9 @@ set -gx NPM_CONFIG_TMP $XDG_RUNTIME_DIR/npm
 
 # pass
 set -gx PASSWORD_STORE_DIR $XDG_DATA_HOME/pass
+
+# gpg aka gnupg
+set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 
 # psql
 set -gx PSQLRC $XDG_CONFIG_HOME/pg/psqlrc
@@ -60,9 +62,8 @@ set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 set -g fish_user_paths $GOENV_ROOT/bin $fish_user_paths
 set -g fish_user_paths $POETRY_HOME/bin $fish_user_paths
 
-
 starship init fish | source
 pyenv init - fish | source
 goenv init - fish | source
 
-ssh-add --apple-load-keychain &> /dev/null
+ssh-add --apple-load-keychain &>/dev/null
