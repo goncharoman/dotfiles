@@ -14,17 +14,20 @@ return {
       -- control auto formatting on save
       format_on_save = {
         enabled = true, -- enable or disable format on save globally
-        allow_filetypes = { -- enable format on save for specified filetypes only
-        },
-        ignore_filetypes = { -- disable format on save for specified filetypes
-        },
+        allow_filetypes = {}, -- enable format on save for specified filetypes only
+        ignore_filetypes = {}, -- disable format on save for specified filetypes
       },
-      disabled = { -- disable formatting capabilities for the listed language servers
-      },
+      disabled = {}, -- disable formatting capabilities for the listed language servers
       timeout_ms = 1000, -- default format timeout
     },
     -- enable servers that you already have installed without mason
     servers = {},
+    -- default capabilities
+    capabilities = {
+      general = {
+        positionEncodings = { "utf-16" },
+      },
+    },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
