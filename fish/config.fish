@@ -22,6 +22,9 @@ end
 set -gx GOPATH $XDG_DATA_HOME/go
 set -gx GOENV_ROOT $XDG_DATA_HOME/goenv
 
+# ghcup
+set -gx GHCUP_USE_XDG_DIRS true
+
 # npm
 set -gx NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
 set -gx NPM_CONFIG_INIT_MODULE $XDG_CONFIG_HOME/npm/config/npm-init.js
@@ -55,12 +58,16 @@ set -gx POETRY_HOME $XDG_DATA_HOME/pypoetry
 set -gx POETRY_CONFIG_DIR $XDG_CONFIG_HOME/pypoetry
 set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 
+# stack (haskell)
+set -gx STACK_XDG true
+
 # PATH
 set -g fish_user_paths $HOMEBREW_HOME/bin $fish_user_paths
 set -g fish_user_paths $HOMEBREW_HOME/sbin $fish_user_paths
 set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 set -g fish_user_paths $GOENV_ROOT/bin $fish_user_paths
 set -g fish_user_paths $POETRY_HOME/bin $fish_user_paths
+set -g fish_user_paths $HOME/.local/bin $fish_user_paths
 
 starship init fish | source
 pyenv init - fish | source
