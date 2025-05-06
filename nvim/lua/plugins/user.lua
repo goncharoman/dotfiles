@@ -179,4 +179,36 @@ return {
       },
     },
   },
+
+  ---@type LazySpec
+  {
+    "tris203/precognition.nvim",
+    opts = {},
+    specs = {
+      ---@type LazySpec
+      {
+        "AstroNvim/astrocore",
+        ---@type AstroCoreOpts
+        opts = {
+          autocmds = {
+            startup = {
+              {
+                event = { "VimEnter" },
+                desc = "Hide on start",
+                callback = function() require("precognition").hide() end,
+              },
+            },
+          },
+          mappings = {
+            n = {
+              ["<Leader>up"] = {
+                function() require("precognition").toggle() end,
+                desc = "Toggle precognition",
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 }
