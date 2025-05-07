@@ -15,17 +15,14 @@ return {
       ---@diagnostic disable: missing-fields
       config = {
         basedpyright = {
-          before_init = function(_, c)
-            if not c.settings then c.settings = {} end
-            if not c.settings.python then c.settings.python = {} end
-            c.settings.python.pythonPath = vim.fn.exepath "python"
-          end,
+          before_init = function(_, client) client.settings.python = { pythonPath = vim.fn.exepath "python" } end,
           settings = {
             basedpyright = {
               disableOrganizeImports = true,
               analysis = {
-                typeCheckingMode = "basic",
-                diagnosticMode = "workspace",
+                autoSearchPaths = true,
+                typeCheckingMode = "recommended",
+                diagnosticMode = "openFilesOnly",
                 autoImportCompletions = true,
                 useLibraryCodeForType = true,
                 diagnosticSeverityOverrides = {
@@ -42,12 +39,16 @@ return {
           },
         },
         ruff = {
-          cmd_env = { RUFF_TRACE = "messages" },
-          init_options = { logLevel = "error" },
+          init_options = {
+            settings = {
+              logLevel = "info",
+              configurationPreference = "filesystemFirst",
+            },
+          },
         },
       },
       autocmds = {
-        python = {
+        python_lsp = {
           cond = function() return vim.bo.ft == "python" end,
           {
             event = { "BufWritePre" },
@@ -57,6 +58,37 @@ return {
               vim.lsp.buf.code_action { context = { only = { "source.fixAll.ruff" } }, apply = true } ---@diagnostic disable-line: assign-type-mismatch
               -- format code
               vim.lsp.buf.format { async = vim.bo.filetype ~= "python" }
+            end,
+          },
+          {
+            event = { "LspAttach" },
+            desc = "Disable hover capability from Ruff",
+            callback = function(args)
+              local client = vim.lsp.get_client_by_id(args.data.client_id)
+              if client == nil then return end
+              if client.name == "ruff" then client.server_capabilities.hoverProvider = false end
+            end,
+          },
+        },
+      },
+    },
+  },
+
+  {
+    "AstroNvim/astrocore",
+    ---@type AstroCoreOpts
+    opts = {
+      autocmds = {
+        pyvenv = {
+          {
+            event = { "VimEnter" },
+            desc = "Setup python venv on start neovim",
+            callback = function()
+              if vim.fn.isdirectory ".venv" == 1 and vim.fn.filereadable ".venv/pyvenv.cfg" == 1 then
+                vim.notify "Local python virtual environment found (.venv). It will be set"
+                vim.env.VIRTUAL_ENV = vim.fn.getcwd() .. "/.venv"
+                vim.env.PATH = (vim.env.VIRTUAL_ENV .. "/bin") .. ":" .. vim.env.PATH
+              end
             end,
           },
         },
@@ -99,9 +131,9 @@ return {
   {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)
-      local null_ls = require "null-ls"
+      local nls = require "null-ls"
       opts.sources = require("astrocore").list_insert_unique(opts.sources, {
-        null_ls.builtins.diagnostics.mypy.with {
+        nls.builtins.diagnostics.mypy.with {
           prefer_local = ".venv/bin",
         },
       })

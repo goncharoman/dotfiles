@@ -191,7 +191,7 @@ return {
         ---@type AstroCoreOpts
         opts = {
           autocmds = {
-            startup = {
+            _precognition = {
               {
                 event = { "VimEnter" },
                 desc = "Hide on start",
