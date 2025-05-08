@@ -1,80 +1,118 @@
 # dotfiles
 
-## Tools
+> [!CAUTION]
+> This configuration was created and tested on macOS (15.4.1 on Apple Silicon). It has not been tested on other platforms or macOS versions.
 
-- General:
+## Installation and configuration
 
-  - Package manager: [Homebrew](https://github.com/Homebrew/brew)
-  - Shell: [fish](https://github.com/fish-shell/fish-shell)
-  - Shell prompt: [Starship](https://github.com/starship/starship)
-  - Terminal emulator: [ghostty](https://github.com/ghostty-org/ghostty) (spare: [alacritty](https://github.com/alacritty/alacritty))
-  - Terminal multiplexer: [Zellij](https://github.com/zellij-org/zellij)
-  - Code editor: [Neovim](https://github.com/neovim/neovim) with [AstroNvim config](https://github.com/AstroNvim/AstroNvim) (+ vim)
-  - Password manager: [pass](https://www.passwordstore.org)
+**Installation order:**
 
-- Python:
+1. Install Homebrew (and set HOMEBREW_HOME in `~.profile`) and install needed formulas and casks
+2. Configure terminal emulator (ghostty) and multiplexer (zellij)
+3. Install and configure needed toolchains (pyenv, goenv, rustup, ghcup)
+4. Install and configure additional tools (poetry, pass, git, docker desktop)
+5. Setup NeoVim
 
-  - Deps manager: [Poetry](https://github.com/python-poetry/poetry)
-  - Version manager: [pyenv](https://github.com/pyenv/pyenv)
+### Homebrew
 
-- Go:
+To install Homebrew see: https://docs.brew.sh/Installation
 
-  - Version manager: [goenv](https://github.com/go-nv/goenv)
+> [!IMPORTANT]
+> After installing Homebrew, set the `HOMEBREW_HOME` variable (in `~.profile`) to the path to your Homebrew home
 
-- Git:
+Once Homebrew is installed, install the necessary formulas and casks (from `Brewfile`):
 
-  - TUI: [lazygit](https://github.com/jesseduffield/lazygit)
-
-- Containers:
-
-  - [Docker desktop](https://www.docker.com/products/docker-desktop/)
-  - [Podman desktop](https://github.com/podman-desktop/podman-desktop)
-
-## Working environment configuration
-
-Fish shell loads the `$HOME/.profile` file at startup. So this is a good place to define the necessary environment variables.
-
-Template:
-
-```
-export HOMEBREW_HOME=/opt/homebrew
+```sh
+brew bundle install
 ```
 
-## Packages (via Homebrew)
+### Terminal emulator and multiplexer
 
-Necessary packages:
+#### Ghostty
 
-```
-brew install \
-      duckdb \
-      eza \
-      fish \
-      fx \
-      git \
-      goenv \
-      httpie \
-      kubernetes-cli \
-      kubectx \
-      lazydocker \
-      lazygit \
-      lua \
-      luarocks \
-      neovim \
-      pass \
-      pgcli \
-      pyenv \
-      starship \
-      sqlite \
-      typst \
-      zellij
+Change `command` option in `~/.config/ghostty/config`:
+
+```text
+command = <Homebrew home path>/fish -lic zellij
 ```
 
-Casks:
+> [!TIP]
+> You can change the default app icon by set another one from `~/.config/ghostty/icons/` (see: https://discussions.apple.com/thread/255174964)
 
+#### Alacritty
+
+Replace `terminal.shell` option in `~/.config/alacritty/alacritty.toml`:
+
+```toml
+[terminal]
+shell = { program = "<Homebrew home path>/fish", args = [
+  "-ic",
+  "zellij attach --index 0 || zellij",
+] }
 ```
-brew install --cask \
-        ghostty \
-        podman-desktop \
-        stats \
-        vivaldi
+
+#### Zellij
+
+Replace `theme_dir` option in `~/.config/zellij/config.kdl`:
+
+```kdl
+theme_dir "<full path to XDG config home>/zellij/themes"
 ```
+
+### pyenv
+
+Install some version of python and make it global:
+
+```sh
+pyenv install <some version> && pyenv global <some version>
+```
+
+### goenv
+
+Install some version of golang and make it global:
+
+```sh
+goenv install <some version> && goenv global <some version> && goenv rehash
+```
+
+### rustup
+
+Install the rust toolchains:
+
+```sh
+rustup default stable
+```
+
+### ghcup
+
+Install the haskell toolchains by running:
+
+```sh
+ghcup tui
+```
+
+... and select the versions you want
+
+### git
+
+Add a `~/.config/git/user` file with your local configuration
+
+### poetry
+
+Install poetry (see: https://python-poetry.org/docs/#installation) and add a symlink to the XDG executable dir:
+
+```sh
+ln -s $POETRY_HOME/bin/poetry $XDG_BIN_DIR/poetry
+```
+
+### docker desktop
+
+To install Docker desktop see https://docs.docker.com/get-started/introduction/get-docker-desktop/
+
+### pass
+
+_SOON_
+
+## Overview of packages and tools
+
+_SOON_
