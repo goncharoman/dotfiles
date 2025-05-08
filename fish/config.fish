@@ -8,6 +8,7 @@ end
 # XDG
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
+set -gx XDG_BIN_DIR $HOME/.local/bin
 set -gx XDG_RUNTIME_DIR $HOME/.runtime
 set -gx XDG_STATE_HOME $HOME/.local/state
 set -gx XDG_CACHE_HOME $HOME/.cache
@@ -64,10 +65,7 @@ set -gx STACK_XDG true
 # PATH
 set -g fish_user_paths $HOMEBREW_HOME/bin $fish_user_paths
 set -g fish_user_paths $HOMEBREW_HOME/sbin $fish_user_paths
-set -g fish_user_paths $PYENV_ROOT/bin $fish_user_paths
-set -g fish_user_paths $GOENV_ROOT/bin $fish_user_paths
-set -g fish_user_paths $POETRY_HOME/bin $fish_user_paths
-set -g fish_user_paths $HOME/.local/bin $fish_user_paths
+set -g fish_user_paths $XDG_BIN_DIR $fish_user_paths
 
 starship init fish | source
 pyenv init - fish | source
