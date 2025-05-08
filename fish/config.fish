@@ -20,8 +20,9 @@ if test -z HOMEBREW_HOME
 end
 
 # go
-set -gx GOPATH $XDG_DATA_HOME/go
 set -gx GOENV_ROOT $XDG_DATA_HOME/goenv
+set -gx GOENV_GOPATH_PREFIX $XDG_DATA_HOME/go
+set -gx GOENV_RC_FILE $XDG_CONFIG_HOME/goenv/goenvrc
 
 # ghcup
 set -gx GHCUP_USE_XDG_DIRS true
