@@ -9,8 +9,9 @@ return {
     opts = function(_, opts)
       opts.config = vim.tbl_deep_extend("keep", opts.config, {
         clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
           capabilities = {
-            offsetEncoding = "utf-8",
+            offsetEncoding = "utf-16",
           },
         },
       })
@@ -28,7 +29,6 @@ return {
           "c",
           "objc",
           "cuda",
-          "proto",
         })
       end
     end,
