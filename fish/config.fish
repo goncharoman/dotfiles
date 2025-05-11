@@ -19,6 +19,10 @@ if test -z HOMEBREW_HOME
     set -gx HOMEBREW_HOME /opt/homebrew
 end
 
+# rust
+set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
+set -gx CARGO_HOME $XDG_DATA_HOME/cargo
+
 # go
 set -gx GOENV_ROOT $XDG_DATA_HOME/goenv
 set -gx GOENV_GOPATH_PREFIX $XDG_DATA_HOME/go
@@ -71,5 +75,6 @@ set -g fish_user_paths $XDG_BIN_DIR $fish_user_paths
 starship init fish | source
 pyenv init - fish | source
 goenv init - fish | source
+source $CARGO_HOME/env.fish
 
 ssh-add --apple-load-keychain &>/dev/null
