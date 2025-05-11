@@ -1,7 +1,6 @@
 return {
 
-  ---@type LazySpec
-  { "andweeb/presence.nvim" },
+  { "better-escape.nvim", enabled = false },
 
   ---@type LazySpec
   {
