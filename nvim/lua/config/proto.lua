@@ -20,5 +20,44 @@ return {
         "buf",
       })
     end,
+    specs = {
+
+      ---@type LazySpec
+      {
+        "AstroNvim/astrolsp",
+        ---@type AstroLSPOpts
+        opts = {
+          handlers = {
+            buf_ls = false,
+          },
+          servers = { "buf:lsp" },
+          ---@diagnostic disable: missing-fields
+          config = {
+            ["buf:lsp"] = {
+              cmd = { "buf", "beta", "lsp", "--timeout=0", "--log-format=text" },
+              filetypes = { "proto" },
+              root_dir = require("lspconfig.util").root_pattern { "buf.yaml", "buf.yml", ".git" },
+            },
+          },
+        },
+      },
+    },
+  },
+
+  ---@type LazySpec
+  {
+    "nvimtools/none-ls.nvim",
+    opts = function()
+      local nls = require "null-ls"
+      nls.register {
+        name = "buf:format",
+        filetypes = { "proto" },
+        sources = {
+          nls.builtins.formatting.buf.with {
+            condition = function(utils) return utils.root_has_file { "buf.yaml", "buf.yml" } end,
+          },
+        },
+      }
+    end,
   },
 }

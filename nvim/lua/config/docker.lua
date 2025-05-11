@@ -39,4 +39,15 @@ return {
       })
     end,
   },
+
+  ---@type LazySpec
+  {
+    "nvimtools/none-ls.nvim",
+    opts = function(_, opts)
+      local nls = require "null-ls"
+      opts.sources = require("astrocore").list_insert_unique(opts.sources, {
+        nls.builtins.diagnostics.hadolint,
+      })
+    end,
+  },
 }

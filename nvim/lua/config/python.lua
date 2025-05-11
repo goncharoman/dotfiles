@@ -2,6 +2,35 @@ return {
 
   ---@type LazySpec
   {
+    "AstroNvim/astrocore",
+    ---@type AstroCoreOpts
+    opts = {
+      filetypes = {
+        extension = {
+          ["j2"] = "django",
+          ["django"] = "django",
+        },
+      },
+      autocmds = {
+        pyvenv = {
+          {
+            event = { "VimEnter" },
+            desc = "Setup python venv on start neovim",
+            callback = function()
+              if vim.fn.isdirectory ".venv" == 1 and vim.fn.filereadable ".venv/pyvenv.cfg" == 1 then
+                vim.notify "Local python virtual environment found (.venv). It will be set"
+                vim.env.VIRTUAL_ENV = vim.fn.getcwd() .. "/.venv"
+                vim.env.PATH = (vim.env.VIRTUAL_ENV .. "/bin") .. ":" .. vim.env.PATH
+              end
+            end,
+          },
+        },
+      },
+    },
+  },
+
+  ---@type LazySpec
+  {
     "AstroNvim/astrolsp",
     ---@type AstroLSPOpts
     opts = {
@@ -74,28 +103,6 @@ return {
     },
   },
 
-  {
-    "AstroNvim/astrocore",
-    ---@type AstroCoreOpts
-    opts = {
-      autocmds = {
-        pyvenv = {
-          {
-            event = { "VimEnter" },
-            desc = "Setup python venv on start neovim",
-            callback = function()
-              if vim.fn.isdirectory ".venv" == 1 and vim.fn.filereadable ".venv/pyvenv.cfg" == 1 then
-                vim.notify "Local python virtual environment found (.venv). It will be set"
-                vim.env.VIRTUAL_ENV = vim.fn.getcwd() .. "/.venv"
-                vim.env.PATH = (vim.env.VIRTUAL_ENV .. "/bin") .. ":" .. vim.env.PATH
-              end
-            end,
-          },
-        },
-      },
-    },
-  },
-
   ---@type LazySpec
   {
     "nvim-treesitter/nvim-treesitter",
@@ -114,15 +121,12 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        -- language servers
-        "basedpyright",
-        { "ruff", version = "0.11.5" },
-        -- linters
-        "mypy",
-        -- formatters
-        "djlint",
-        -- debuggers
-        "debugpy",
+        --
+        "basedpyright", -- additional language servers
+        { "ruff", version = "0.11.5" }, -- main language servers (and formatter via code action)
+        "mypy", -- code analysis tool
+        "djlint", -- linter for django
+        "debugpy", -- debugger
       })
     end,
   },
@@ -136,21 +140,8 @@ return {
         nls.builtins.diagnostics.mypy.with {
           prefer_local = ".venv/bin",
         },
+        nls.builtins.diagnostics.djlint,
       })
     end,
-  },
-
-  ---@type LazySpec
-  {
-    "AstroNvim/astrocore",
-    ---@type AstroCoreOpts
-    opts = {
-      filetypes = {
-        extension = {
-          ["j2"] = "django",
-          ["django"] = "django",
-        },
-      },
-    },
   },
 }

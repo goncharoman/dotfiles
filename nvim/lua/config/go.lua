@@ -102,42 +102,16 @@ return {
         -- language servers
         "gopls",
         -- formatters
-        "gomodifytags",
-        "gotests",
         "goimports",
         -- debugger
         "delve",
-        -- other
+        -- other (require for gopher)
         "iferr",
+        "gotests",
         "impl",
+        "gomodifytags",
       })
     end,
-  },
-
-  ---@type LazySpec
-  -- {
-  --   "nvimtools/none-ls.nvim",
-  --   opts = function(_, opts)
-  --     local null_ls = require "null-ls"
-  --     opts.sources = require("astrocore").list_insert_unique(opts.sources, {
-  --       null_ls.builtins.code_actions.gomodifytags,
-  --       null_ls.builtins.formatting.goimports,
-  --     })
-  --   end,
-  -- },
-
-  ---@type LazySpec
-  {
-    "echasnovski/mini.icons",
-    optional = true,
-    opts = {
-      file = {
-        [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
-      },
-      filetype = {
-        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
-      },
-    },
   },
 
   ---@type LazySpec
@@ -156,5 +130,30 @@ return {
       { "williamboman/mason.nvim", optional = true }, -- by default use Mason for go dependencies
     },
     opts = {},
+  },
+
+  ---@type LazySpec
+  {
+    "nvimtools/none-ls.nvim",
+    opts = function(_, opts)
+      local nls = require "null-ls"
+      opts.sources = require("astrocore").list_insert_unique(opts.sources, {
+        nls.builtins.formatting.goimports,
+      })
+    end,
+  },
+
+  ---@type LazySpec
+  {
+    "echasnovski/mini.icons",
+    optional = true,
+    opts = {
+      file = {
+        [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
+      },
+      filetype = {
+        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
+      },
+    },
   },
 }

@@ -9,12 +9,11 @@ return {
     opts = {
       ---@diagnostic disable: missing-fields
       config = {
-        hls = {
-          settings = {
-            cabalFormattingProvider = "cabalfmt",
-            formattingProvider = "ormolu",
-          },
-        },
+        -- hls = {
+        --   settings = {
+        --
+        --   },
+        -- },
       },
     },
   },

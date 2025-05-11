@@ -31,11 +31,7 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      tinymist = {
-        settings = {
-          formatterMode = "typestyle",
-        },
-      },
+      lua_ls = { settings = { Lua = { hint = { enable = true, arrayIndex = "Disable" } } } },
     },
     -- customize how language servers are attached
     handlers = {},
