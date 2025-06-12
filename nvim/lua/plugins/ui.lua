@@ -450,15 +450,6 @@ return {
   },
 
   {
-    "mvllow/modes.nvim",
-    commit = "40f53eb",
-    opts = {
-      line_opacity = 0.1,
-      ignore = { "snacks_picker_input" },
-    },
-  },
-
-  {
     "SmiteshP/nvim-navic",
     lazy = true,
     init = function()
