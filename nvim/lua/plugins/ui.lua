@@ -262,14 +262,19 @@ return {
           explorer = {
             title = "Explorer",
             diagnostics = false,
+            ignored = {
+              "**/.venv",
+            },
             exclude = {
               "**/__pycache__",
-              "**/.*",
+              "**/.*_cache",
             },
             include = {
               ".gitignore",
               ".env.*",
               ".env",
+              ".ci",
+              ".github",
             },
           },
         },
