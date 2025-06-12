@@ -568,7 +568,6 @@ return {
   {
     "saghen/blink.cmp",
     event = "VeryLazy",
-    priority = 101,
     opts = function(_, opts)
       local mini = require "mini.icons"
 
@@ -577,29 +576,29 @@ return {
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       }
-      opts.completion = {
-        menu = {
-          draw = {
-            padding = { 1, 2 },
-            columns = { { "label", "label_description", gap = 10 }, { "kind_icon", "kind", "source_name" } },
-            components = {
-              kind_icon = {
-                text = function(ctx)
-                  local kind_icon, _, _ = mini.get("lsp", ctx.kind)
-                  return "  " .. kind_icon .. "  "
-                end,
-                highlight = function(ctx)
-                  local _, hl, _ = mini.get("lsp", ctx.kind)
-                  return hl
-                end,
-              },
-              kind = {
-                highlight = function(ctx)
-                  local _, hl, _ = mini.get("lsp", ctx.kind)
-                  return hl
-                end,
-              },
-            },
+      opts.fuzzy = {
+        implementation = "rust",
+        sorts = { "score", "sort_text", "kind", "label" },
+      }
+      opts.completion.menu.draw = {
+        padding = { 1, 2 },
+        columns = { { "label", "label_description", gap = 10 }, { "kind_icon", "kind", "source_name" } },
+        components = {
+          kind_icon = {
+            text = function(ctx)
+              local kind_icon, _, _ = mini.get("lsp", ctx.kind)
+              return "  " .. kind_icon .. "  "
+            end,
+            highlight = function(ctx)
+              local _, hl, _ = mini.get("lsp", ctx.kind)
+              return hl
+            end,
+          },
+          kind = {
+            highlight = function(ctx)
+              local _, hl, _ = mini.get("lsp", ctx.kind)
+              return hl
+            end,
           },
         },
       }
