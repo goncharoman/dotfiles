@@ -78,7 +78,7 @@ return {
           border = "rounded",
           source = false,
           prefix = function(diagnostic, _, _) return string.format("%s: ", diagnostic.source), "Italic" end,
-          suffix = function(diagnostic) return string.format("(%s)", diagnostic.code), "NonText" end,
+          suffix = function(diagnostic) return string.format(" (%s)", diagnostic.code), "NonText" end,
           header = { "Diagnostics:", "NvimFloat" },
         },
         severity_sort = true,
