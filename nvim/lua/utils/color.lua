@@ -3,25 +3,19 @@ return {
   ---@param hlgroup string highlight name
   ---@param attr string hl attr (like 'bg' or 'fg')
   ---@return string
-  hlcolor = function(hlgroup, attr)
-    return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hlgroup)), attr .. "#")
-  end,
+  hlcolor = function(hlgroup, attr) return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hlgroup)), attr .. "#") end,
   ---Get normalised colour
   ---@param color string colour like 'pink' or '#fa8072'
   ---@return string[]
   normcolor = function(color)
     local color = vim.api.nvim_get_color_by_name(color)
-    local byte = function(value, offset)
-      return bit.band(bit.rshift(value, offset), 0xFF)
-    end
+    local byte = function(value, offset) return bit.band(bit.rshift(value, offset), 0xFF) end
     return { byte(color, 16), byte(color, 8), byte(color, 0) }
   end,
   ---Set highlight
   ---@param hlgroup string highlight name
   ---@param def table highlight def
-  hlset = function(hlgroup, def)
-    vim.api.nvim_set_hl(0, hlgroup, def)
-  end,
+  hlset = function(hlgroup, def) vim.api.nvim_set_hl(0, hlgroup, def) end,
   ---Extand highlight
   ---@param hlgroup string highlight name
   ---@param def table new highlight def

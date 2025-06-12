@@ -1,11 +1,9 @@
 return {
   linters = function()
-    local lint = require("lint")
+    local lint = require "lint"
     local names = lint._resolve_linter_by_ft(vim.bo.filetype)
     names = vim.list_extend({}, names)
-    if #names == 0 then
-      vim.list_extend(names, lint.linters_by_ft["_"] or {})
-    end
+    if #names == 0 then vim.list_extend(names, lint.linters_by_ft["_"] or {}) end
     vim.list_extend(names, lint.linters_by_ft["*"] or {})
     local ctx = { filename = vim.api.nvim_buf_get_name(0) }
     ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
