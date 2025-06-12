@@ -43,6 +43,7 @@ return {
             ["@keyword.exception.python"] = { fg = "pine", italic = true },
             ["@keyword.conditional.python"] = { fg = "pine", italic = true },
             ["@keyword.return"] = { italic = true },
+            ["@constant.python"] = { fg = "love" },
             ["@lsp.type.decorator.python"] = { italic = true },
             ["@lsp.type.class.python"] = { fg = "foam" },
             ["@module.python"] = { fg = "lfoam" },
