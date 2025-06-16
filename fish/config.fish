@@ -27,6 +27,7 @@ set -gx CARGO_HOME $XDG_DATA_HOME/cargo
 set -gx GOENV_ROOT $XDG_DATA_HOME/goenv
 set -gx GOENV_GOPATH_PREFIX $XDG_DATA_HOME/go
 set -gx GOENV_RC_FILE $XDG_CONFIG_HOME/goenv/goenvrc
+set -gx GOENV_PATH_ORDER front
 
 # ghcup
 set -gx GHCUP_USE_XDG_DIRS true
@@ -68,9 +69,7 @@ set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 set -gx STACK_XDG true
 
 # PATH
-set -g fish_user_paths $HOMEBREW_HOME/bin $fish_user_paths
-set -g fish_user_paths $HOMEBREW_HOME/sbin $fish_user_paths
-set -g fish_user_paths $XDG_BIN_DIR $fish_user_paths
+set -gx PATH $XDG_BIN_DIR $PATH
 
 starship init fish | source
 pyenv init - fish | source
