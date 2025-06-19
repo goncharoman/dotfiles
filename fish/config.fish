@@ -69,7 +69,15 @@ set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 set -gx STACK_XDG true
 
 # PATH
-set -gx PATH $XDG_BIN_DIR $PATH
+if not contains $HOMEBREW_HOME/bin $PATH
+    set -gx PATH $HOMEBREW_HOME/bin $PATH
+end
+if not contains $HOMEBREW_HOME/sbin $PATH
+    set -gx PATH $HOMEBREW_HOME/sbin $PATH
+end
+if not contains $XDG_BIN_DIR $PATH
+    set -gx PATH $XDG_BIN_DIR $PATH
+end
 
 starship init fish | source
 pyenv init - fish | source
