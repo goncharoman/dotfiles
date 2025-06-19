@@ -1,31 +1,23 @@
 [include]
-	path = user # user config
+  path = user # user config
 
 [core]
-	editor = nvim
-	pager = delta 
-
-[interactive]
-	diffFilter = delta --color-only
-
-[delta]
-  navigate = true
-  dark = true
-  side-by-side = true
-  line-numbers = true
+  editor = nvim
+  pager = less -+FX -r
 
 [merge]
-	tool = diffview
-	conflictstyle = zdiff3
+  tool = diffview
+  conflictstyle = zdiff3
 
 [mergetool]
-	prompt = false
-	keepBackup = false
+  prompt = false
+  keepBackup = false
 
 [mergetool "diffview"]
-	cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+  cmd = nvim -n -c "DiffviewOpen" "$MERGE"
 
 [alias]
   history = log --graph --abbrev-commit --decorate=full --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
   unstage = reset HEAD --
   discard = checkout --
+  stat = !git --no-pager diff --stat 
