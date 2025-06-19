@@ -8,15 +8,15 @@ theme = rose-pine-moon
 background-opacity = 0.95
 background-blur = true
 
-font-family = "RobotoMono Nerd Font"
+font-family = "SFMono Nerd Font"
 font-style = "SemiBold"
 font-style-italic = "SemiBold Italic"
 font-style-bold = "Bold"
 font-style-bold-italic = "Bold Italic"
-font-feature = zero ss01 cv11
 font-size = 11
 font-thicken = true
 alpha-blending = native
+adjust-cell-height = 20%
 
 cursor-style = block
 cursor-style-blink = false
