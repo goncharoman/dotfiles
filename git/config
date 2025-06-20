@@ -21,3 +21,5 @@
   unstage = reset HEAD --
   discard = checkout --
   stat = !git --no-pager diff --stat 
+[init]
+	defaultBranch = main
