@@ -10,7 +10,7 @@
 1. Install Homebrew (and set HOMEBREW_HOME in `~.profile`) and install needed formulas and casks
 2. Configure terminal emulator (ghostty) and multiplexer (zellij)
 3. Install and configure needed toolchains (pyenv, goenv, rustup, ghcup)
-4. Install and configure additional tools (poetry, pass, git, docker desktop)
+4. Install and configure additional tools (poetry, pass, git, podman desktop)
 5. Setup NeoVim
 
 ### Homebrew
