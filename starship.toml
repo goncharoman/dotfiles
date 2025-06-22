@@ -88,22 +88,37 @@ Windows = "󰍲 "
 disabled = false
 symbol = ""
 format = "[](fg:overlay)[ $symbol $branch ]($style)"
-style = "bg:overlay fg:iris"
+style = "bg:overlay fg:rose"
 
 [git_status]
 disabled = false
 style = "bg:overlay fg:love"
-format = '([⏽ ](bg:overlay fg:subtle)[$all_status$ahead_behind]($style))[](fg:overlay) '
-up_to_date = '[ ✓ ](bg:overlay fg:iris)'
-untracked = '[?\($count\) ](bg:overlay fg:gold)'
-stashed = '[\$ ](bg:overlay fg:iris)'
-modified = '[!\($count\) ](bg:overlay fg:gold)'
-renamed = '[»\($count\) ](bg:overlay fg:iris)'
-deleted = '[✘\($count\) ](style)'
-staged = '[++\($count\) ](bg:overlay fg:gold)'
-ahead = '[⇡\(${count}\) ](bg:overlay fg:foam)'
-diverged = '⇕[\[](bg:overlay fg:iris)[⇡\(${ahead_count}\)](bg:overlay fg:foam)[⇣\(${behind_count}\)](bg:overlay fg:rose)[\]](bg:overlay fg:iris)'
-behind = '[⇣\(${count}\) ](bg:overlay fg:rose)'
+format = '([⏽](bg:overlay fg:subtle)[$all_status$ahead_behind]($style))[ ](fg:overlay)'
+conflicted = "[  ](bg:overlay fg:gold)"
+stashed = '[  ](bg:overlay fg:iris)'
+untracked = '[  $count](bg:overlay fg:highlight)'
+modified = '[  $count](bg:overlay fg:gold)'
+renamed = '[  $count](bg:overlay fg:iris)'
+deleted = '[  $count](bg:overlay fg:love)'
+staged = '[  $count](bg:overlay fg:foam)'
+up_to_date = '[  ](bg:overlay fg:pine)'
+ahead = '[  $count ](bg:overlay fg:foam)'
+diverged = '[  ](bg:overlay fg:rose)[$behind_count](bg:overlay fg:gold)[/](bg:overlay fg:highlight)[$ahead_count](bg:overlay fg:foam) '
+behind = '[  $count ](bg:overlay fg:gold)'
+
+[git_metrics]
+disabled = true
+
+[git_commit]
+disabled = false
+format = '(fg:overlay)[\($hash$tag\) ]($style)(fg:overlay)'
+style = "bg:overlay fg:pine"
+tag_symbol = '  '
+
+[git_state]
+disabled = false
+format = '(bg:overlay)[\($state( $progress_current of $progress_total)\) ]($style)(bg:overlay)'
+style = "bg:overlay fg:gold"
 
 [buf]
 symbol = " "
@@ -162,11 +177,6 @@ format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($styl
 style = "bg:overlay fg:pine"
 symbol = " "
 
-[git_commit]
-disabled = false
-format = '[](fg:overlay)[\($hash$tag\) ]($style)[](fg:overlay) '
-style = "bg:overlay fg:pine"
-tag_symbol = '  '
 
 [golang]
 disabled = false
@@ -309,6 +319,7 @@ symbol = " "
 [palettes.rose-pine]
 text = "#e0def4"
 subtle = "#908caa"
+highlight = "#cecacd"
 overlay = '#44415a'
 love = '#eb6f92'
 gold = '#f6c177'
