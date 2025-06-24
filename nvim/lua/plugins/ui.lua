@@ -18,7 +18,7 @@ return {
           opts.styles = {
             bold = false,
             italic = false,
-            transparency = false,
+            transparency = true,
           }
           opts.palette = {
             moon = {
