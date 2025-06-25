@@ -18,7 +18,7 @@ return {
           opts.styles = {
             bold = false,
             italic = false,
-            transparency = true,
+            transparency = false,
           }
           opts.palette = {
             moon = {
@@ -321,13 +321,10 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-    },
     opts = function(_, opts)
       local icons = LazyVim.config.icons
 
-      local components = {
+      opts.components = {
         statusline = {
           mode = {
             function() return "nvim" end,
@@ -431,16 +428,12 @@ return {
       }
 
       opts.sections = {
-        lualine_a = { components.statusline.mode },
-        lualine_b = { components.statusline.gitbranch },
-        lualine_c = { components.statusline.filepath, components.statusline.gitdiff },
-        lualine_x = { components.statusline.diagnostics, components.statusline.langtools },
-        lualine_y = { components.statusline.filetype },
-        lualine_z = { components.statusline.location },
-      }
-
-      opts.winbar = {
-        lualine_c = { components.winbar.navic },
+        lualine_a = { opts.components.statusline.mode },
+        lualine_b = { opts.components.statusline.gitbranch },
+        lualine_c = { opts.components.statusline.filepath, opts.components.statusline.gitdiff },
+        lualine_x = { opts.components.statusline.diagnostics, opts.components.statusline.langtools },
+        lualine_y = { opts.components.statusline.filetype },
+        lualine_z = { opts.components.statusline.location },
       }
     end,
   },
@@ -454,6 +447,7 @@ return {
   {
     "SmiteshP/nvim-navic",
     lazy = true,
+    enabled = false,
     init = function()
       vim.g.navic_silence = true
       LazyVim.lsp.on_attach(function(client, buffer)
@@ -466,9 +460,19 @@ return {
         highlight = false,
         depth_limit = 7,
         icons = LazyVim.config.icons.kinds,
-        lazy_update_context = true,
+        lazy_update_context = false,
       }
     end,
+    specs = {
+      {
+        "nvim-lualine/lualine.nvim",
+        opts = function(_, opts)
+          opts.winbar = {
+            lualine_c = { opts.components.winbar.navic },
+          }
+        end,
+      },
+    },
   },
 
   {
