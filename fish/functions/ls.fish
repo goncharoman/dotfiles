@@ -1,4 +1,3 @@
 function ls --wraps='exa --icons' --description 'alias ls=exa --icons'
-  eza $argv
-        
+    eza $argv
 end

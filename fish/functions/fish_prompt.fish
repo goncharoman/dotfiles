@@ -10,7 +10,7 @@ function fish_prompt
     # Account for changes in variable name between v2.7 and v3.0
     set STARSHIP_DURATION "$CMD_DURATION$cmd_duration"
     set STARSHIP_JOBS (count (jobs -p))
-    if test "$TRANSIENT" = "1"
+    if test "$TRANSIENT" = 1
         # Clear from cursor to end of screen as `commandline -f repaint` does not do this
         # See https://github.com/fish-shell/fish-shell/issues/8418
         printf \e\[0J

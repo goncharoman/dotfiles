@@ -15,5 +15,5 @@ function envsource
                 eval $line # allow for simple commands to be run e.g. cd dir/mamba activate env
             end
         end
-    end < "$envfile"
+    end <"$envfile"
 end

@@ -10,7 +10,7 @@ function fish_right_prompt
     # Account for changes in variable name between v2.7 and v3.0
     set STARSHIP_DURATION "$CMD_DURATION$cmd_duration"
     set STARSHIP_JOBS (count (jobs -p))
-    if test "$TRANSIENT" = "1"
+    if test "$TRANSIENT" = 1
         if type -q starship_transient_rprompt_func
             starship_transient_rprompt_func
         else
