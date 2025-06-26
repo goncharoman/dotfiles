@@ -17,7 +17,7 @@
   cmd = nvim -n -c "DiffviewOpen" "$MERGE"
 
 [alias]
-  history = log --graph --abbrev-commit --decorate=full --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
+  graph = log --graph --abbrev-commit --decorate=full --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
   unstage = reset HEAD --
   discard = checkout --
   stat = !git --no-pager diff --stat 
