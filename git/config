@@ -3,7 +3,7 @@
 
 [core]
   editor = nvim
-  pager = less -+FX -r
+  pager = less -+FX -S
 
 [merge]
   tool = diffview
@@ -17,8 +17,9 @@
   cmd = nvim -n -c "DiffviewOpen" "$MERGE"
 
 [alias]
-  graph = log --graph --abbrev-commit --decorate=full --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
+  graph = log --graph --abbrev-commit --decorate=short --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
   unstage = reset HEAD --
-  stat = !git --no-pager diff --stat 
+  stat = !git --no-pager diff --stat
+
 [init]
 	defaultBranch = main
