@@ -3,23 +3,14 @@
 
 [core]
   editor = nvim
-  pager = less -+FX -r
-
-[merge]
-  tool = diffview
-  conflictstyle = zdiff3
-
-[mergetool]
-  prompt = false
-  keepBackup = false
-
-[mergetool "diffview"]
-  cmd = nvim -n -c "DiffviewOpen" "$MERGE"
+  pager = less -+FX -S
 
 [alias]
-  history = log --graph --abbrev-commit --decorate=full --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
+  graph = log --graph --abbrev-commit --decorate=short --pretty='%C(red)%h%C(reset) --%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
   unstage = reset HEAD --
-  discard = checkout --
-  stat = !git --no-pager diff --stat 
+  stat = !git --no-pager diff --stat
+  tui = lg
+  lg = !lazygit
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
