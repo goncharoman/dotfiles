@@ -70,6 +70,10 @@ if not contains $XDG_BIN_DIR $PATH
     set -gx PATH $XDG_BIN_DIR $PATH
 end
 
+# set defaults editor and pager
+set -gx EDITOR nvim
+set -gx PAGER 'less -+FX -S'
+
 $HOMEBREW_HOME/bin/brew shellenv | source
 starship init fish | source
 pyenv init - fish | source
