@@ -13,11 +13,8 @@ set -gx XDG_RUNTIME_DIR $HOME/.runtime
 set -gx XDG_STATE_HOME $HOME/.local/state
 set -gx XDG_CACHE_HOME $HOME/.cache
 
-# Homebrew 
+# Homebrew
 set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
-if test -z HOMEBREW_HOME
-    set -gx HOMEBREW_HOME /opt/homebrew
-end
 
 # rust
 set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
@@ -69,16 +66,11 @@ set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
 set -gx STACK_XDG true
 
 # PATH
-if not contains $HOMEBREW_HOME/bin $PATH
-    set -gx PATH $HOMEBREW_HOME/bin $PATH
-end
-if not contains $HOMEBREW_HOME/sbin $PATH
-    set -gx PATH $HOMEBREW_HOME/sbin $PATH
-end
 if not contains $XDG_BIN_DIR $PATH
     set -gx PATH $XDG_BIN_DIR $PATH
 end
 
+$HOMEBREW_HOME/bin/brew shellenv | source
 starship init fish | source
 pyenv init - fish | source
 goenv init - fish | source
