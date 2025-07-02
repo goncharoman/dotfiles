@@ -11,6 +11,13 @@
   stat = !git --no-pager diff --stat
   tui = lg
   lg = !lazygit
+  history = !git forgit log
+  ignore = forgit ignore
+  cd = forgit show
+  ss = forgit stash_show
+  cf = forgit checkout_file
+  ri = forgit rebase
+  cp = forgit cherry_pick
 
 [init]
   defaultBranch = main
