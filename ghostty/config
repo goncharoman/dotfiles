@@ -9,10 +9,10 @@ background-opacity = 0.92
 background-blur = true
 
 font-family = "SFMono Nerd Font"
-font-style = "SemiBold"
-font-style-italic = "SemiBold Italic"
-font-style-bold = "Bold"
-font-style-bold-italic = "Bold Italic"
+font-style = "Regular"
+font-style-italic = "Italic"
+font-style-bold = "SemiBold"
+font-style-bold-italic = "SemiBold Italic"
 font-size = 10
 font-thicken = true
 alpha-blending = native
