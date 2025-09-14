@@ -271,6 +271,7 @@ return {
               "**/.*_cache",
             },
             include = {
+              ".pre-commit-config.*",
               ".gitignore",
               ".env.*",
               ".env",
