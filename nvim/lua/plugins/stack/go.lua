@@ -87,7 +87,7 @@ return {
     "mason.nvim",
     event = "VeryLazy",
     opts = {
-      ensure_installed = { "goimports", "gofumpt", "gomodifytags", "impl", "iferr" },
+      ensure_installed = { "goimports", "gofumpt", "gomodifytags", "impl", "iferr", "gotests" },
     },
   },
   {
