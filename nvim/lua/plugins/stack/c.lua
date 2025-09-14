@@ -92,7 +92,7 @@ return {
     },
   },
   {
-    "mason-org/mason.nvim",
+    "mason.nvim",
     event = "VeryLazy",
     opts = {
       ensure_installed = { "codelldb" },

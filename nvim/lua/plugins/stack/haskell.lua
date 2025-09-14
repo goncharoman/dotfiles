@@ -10,7 +10,7 @@ return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "mason-org/mason.nvim",
+      "mason.nvim",
       opts = {
         ensure_installed = { "haskell-language-server" },
       },

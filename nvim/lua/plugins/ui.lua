@@ -212,7 +212,7 @@ return {
         end,
       },
       {
-        "mason-org/mason.nvim",
+        "mason.nvim",
         event = "VeryLazy",
         keys = function() return {} end,
       },
@@ -490,7 +490,7 @@ return {
   },
 
   {
-    "mason-org/mason.nvim",
+    "mason.nvim",
     event = "VeryLazy",
     opts = function(_, opts)
       opts.ui = {
