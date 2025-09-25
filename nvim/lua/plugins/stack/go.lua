@@ -112,7 +112,7 @@ return {
     opts = {},
   },
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     event = "VeryLazy",
     opts = {
       file = {

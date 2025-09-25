@@ -6,6 +6,44 @@ return {
     priority = 100,
     dependencies = {
       {
+        "folke/tokyonight.nvim",
+        name = "tokyonight",
+        event = "VeryLazy",
+        opts = function(_, opts)
+          local utils = require "tokyonight.util"
+          opts.style = "moon"
+          opts.on_highlights = function(hl, colors)
+            hl["@keyword.function.python"] = hl["@keyword"]
+            hl["@variable.member.python"] = { fg = utils.lighten(colors.teal, 0.4), italic = true }
+            hl["@lsp.type.selfParameter.python"] = { fg = colors.red, italic = true }
+            hl["@lsp.type.decorator.python"] = { fg = colors.orange, italic = true }
+            hl["@lsp.type.namespace.python"] = { fg = utils.lighten(colors.blue0, 0.2) }
+            hl["@variable.parameter.python"] = { fg = colors.yellow, italic = true }
+            hl["@keyword.conditional.python"] = hl["@keyword"]
+            hl["@keyword.repeat.python"] = hl["@keyword"]
+            hl["@keyword.exception.python"] = hl["@keyword"]
+            hl["@keyword.operator.python"] = hl["@keyword"]
+            hl["@constant.builtin.python"] = { fg = colors.magenta }
+            hl["DiagnosticUnderlineError"] = { underline = false }
+            hl["DiagnosticUnderlineWarn"] = { underline = false }
+            hl["DiagnosticUnderlineInfo"] = { underline = false }
+            hl["@constant.python"] = { fg = colors.red }
+            hl["@comment.error"] = { fg = colors.red }
+            hl["DiagnosticVirtualTextError"] = { fg = colors.red }
+            hl["DiagnosticError"] = { fg = colors.red }
+            hl["Error"] = { fg = colors.red }
+            hl["ErrorMsg"] = { fg = colors.red }
+            hl["SnacksNotifierTitleError"] = { fg = colors.red }
+            hl["SnacksNotifierIconError"] = { fg = colors.red }
+          end
+          opts.cache = true
+          opts.plugins = {
+            all = true,
+            auto = true,
+          }
+        end,
+      },
+      {
         "rose-pine/neovim",
         name = "rose-pine",
         priority = 100,
@@ -53,10 +91,10 @@ return {
       },
     },
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "tokyonight",
     },
     specs = {
-      { "folke/tokyonight.nvim", enabled = false },
+      { "rose-pine", enabled = false },
       { "catppuccin/nvim", enabled = false },
     },
   },
@@ -257,7 +295,7 @@ return {
         },
       },
       image = { enabled = false },
-      notifier = { level = vim.log.levels.DEBUG },
+      notifier = { level = vim.log.levels.INFO },
       picker = {
         sources = {
           explorer = {
@@ -378,7 +416,7 @@ return {
           langtools = {
             function()
               local clients = {}
-              for _, client in pairs(LazyVim.lsp.get_clients { bufnr = 0 }) do
+              for _, client in pairs(vim.lsp.get_clients { bufnr = 0 }) do
                 if client.name ~= "copilot" and client.name ~= "null-ls" then
                   table.insert(clients, vim.g.aliases[client.name] or client.name)
                 end
@@ -502,9 +540,9 @@ return {
   },
 
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     event = "VeryLazy",
-    opts = function(_, opts)
+    opts = function(_, _)
       local bg = LazyVim.color.hlcolor("Normal", "bg")
       LazyVim.color.hlset(
         "MiniIconsCyanLight",

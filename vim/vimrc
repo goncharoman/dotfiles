@@ -31,4 +31,4 @@ set termguicolors
 hi Cursor guifg=NONE guibg=NONE gui=reverse cterm=reverse
 set guicursor=n-v-c:block-Cursor/lCursor
 
-colorscheme rose-pine
+colorscheme tokyonight

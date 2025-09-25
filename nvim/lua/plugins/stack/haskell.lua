@@ -1,5 +1,7 @@
 local haskellft = { "haskell", "lhaskell", "cabal", "cabalproject" }
 
+vim.notify("The plugin 'mrcjkb/haskell-snippets.nvim' has been disabled due to an error.\nCheck for updates", "info")
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -23,6 +25,7 @@ return {
   },
   {
     "mrcjkb/haskell-snippets.nvim",
+    enabled = false,
     ft = haskellft,
     event = "VeryLazy",
     dependencies = { "L3MON4D3/LuaSnip" },
