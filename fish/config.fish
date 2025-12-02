@@ -80,6 +80,10 @@ end
 set -gx EDITOR nvim
 set -gx PAGER 'less -+FX -S'
 
+# python
+
+set -gx VIRTUAL_ENV_DISABLE_PROMPT true
+
 $HOMEBREW_HOME/bin/brew shellenv | source
 starship init fish | source
 pyenv init - fish | source
