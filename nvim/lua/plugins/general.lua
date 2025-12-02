@@ -1,10 +1,9 @@
 return {
 
   {
-    "echasnovski/mini.surround",
-    lazy = true,
+    "nvim-mini/mini.surround",
+    event = "VeryLazy",
     keys = function(_, keys)
-      -- Populate the keys based on the user's options
       local opts = LazyVim.opts "mini.surround"
       local mappings = {
         { opts.mappings.add, desc = "Add Surrounding", mode = { "n", "v" } },
@@ -20,25 +19,27 @@ return {
     end,
     opts = {
       mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
-        update_n_lines = "gsn", -- Update `n_lines`
+        add = "gsa",
+        delete = "gsd",
+        find = "gsf",
+        find_left = "gsF",
+        highlight = "gsh",
+        replace = "gsr",
+        update_n_lines = "gsn",
       },
     },
   },
 
   {
     "neovim/nvim-lspconfig",
-    event = "VeryLazy",
+    event = "LazyFile",
     dependencies = {
       {
-        "mason-org/mason-lspconfig.nvim",
+        "mason.nvim",
         opts = {
           ensure_installed = {
+            "prettierd",
+            "shfmt",
             "lua-language-server",
             "yaml-language-server",
             "bash-language-server",
@@ -80,16 +81,8 @@ return {
   },
 
   {
-    "mason.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = { "prettierd", "shfmt" },
-    },
-  },
-
-  {
     "L3MON4D3/LuaSnip",
-    lazy = true,
+    event = "VeryLazy",
     opts = {
       history = true,
       delete_check_events = "TextChanged",

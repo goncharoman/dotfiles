@@ -68,6 +68,9 @@ set -gx FORGIT_LOG_FZF_OPTS --reverse
 # stack (haskell)
 set -gx STACK_XDG true
 
+# eza
+set -gx EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza
+
 # PATH
 if not contains $XDG_BIN_DIR $PATH
     set -gx PATH $XDG_BIN_DIR $PATH
@@ -76,6 +79,10 @@ end
 # set defaults editor and pager
 set -gx EDITOR nvim
 set -gx PAGER 'less -+FX -S'
+
+# python
+
+set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 
 $HOMEBREW_HOME/bin/brew shellenv | source
 starship init fish | source

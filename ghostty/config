@@ -1,11 +1,12 @@
 term = xterm-256color
 
 command = /opt/homebrew/bin/fish -lic zellij
-title = "👻"
+title = "ghostty"
 
-theme = rose-pine-moon
+theme = tokyonight
+macos-icon = custom
 
-background-opacity = 0.92
+background-opacity = 1
 background-blur = true
 
 font-family = "SFMono Nerd Font"
