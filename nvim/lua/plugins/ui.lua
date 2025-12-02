@@ -316,6 +316,7 @@ return {
               ".ci",
               ".github",
               ".dockerignore",
+              ".luarc.json",
             },
           },
         },
@@ -456,14 +457,6 @@ return {
             draw_empty = false,
           },
         },
-        winbar = {
-          navic = {
-            "navic",
-            color_correction = "dynamic",
-            color = "FoldColumn",
-            draw_empty = true,
-          },
-        },
       }
 
       opts.sections = {
@@ -481,37 +474,6 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = function(_, opts) opts.presets.bottom_search = false end,
-  },
-
-  {
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    enabled = false,
-    init = function()
-      vim.g.navic_silence = true
-      LazyVim.lsp.on_attach(function(client, buffer)
-        if client.supports_method "textDocument/documentSymbol" then require("nvim-navic").attach(client, buffer) end
-      end)
-    end,
-    opts = function()
-      return {
-        separator = "  ",
-        highlight = false,
-        depth_limit = 7,
-        icons = LazyVim.config.icons.kinds,
-        lazy_update_context = false,
-      }
-    end,
-    specs = {
-      {
-        "nvim-lualine/lualine.nvim",
-        opts = function(_, opts)
-          opts.winbar = {
-            lualine_c = { opts.components.winbar.navic },
-          }
-        end,
-      },
-    },
   },
 
   {
@@ -647,6 +609,17 @@ return {
           },
         },
       }
+    end,
+  },
+
+  {
+    "mvllow/modes.nvim",
+    -- tag = "v0.2.1",
+    commit = "0932ba4",
+    event = "VeryLazy",
+    opts = function(_, opts)
+      opts.line_opacity = 0.18
+      opts.set_cursor = true
     end,
   },
 }

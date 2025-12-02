@@ -11,6 +11,17 @@ LazyVim.commands.autocmd("python", {
 
 return {
   {
+    "linux-cultist/venv-selector.nvim",
+    event = "VeryLazy",
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" }, -- Open picker on keymap
+    },
+    opts = { -- this can be an empty lua table - just showing below for clarity.
+      search = {}, -- if you add your own searches, they go here.
+      options = {}, -- if you add plugin options, they go here.
+    },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
     opts = { ensure_installed = { "ninja", "rst", "python", "toml" } },
@@ -61,8 +72,11 @@ return {
         },
       },
       setup = {
-        ruff = function()
-          LazyVim.lsp.on_attach(function(client, _) client.server_capabilities.hoverProvider = false end)
+        ["ruff"] = function()
+          Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end)
         end,
       },
     },
