@@ -103,7 +103,7 @@ deleted = '[  $count](bg:overlay fg:red)'
 staged = '[  $count](bg:overlay fg:green)'
 up_to_date = '[  ](bg:overlay fg:blue)'
 ahead = '[  $count ](bg:overlay fg:cyan)'
-diverged = '[  ](bg:overlay fg:purple)[$behind_count](bg:overlay fg:yellow)[/](bg:overlay fg:highlight)[$ahead_count](bg:overlay fg:cyan) '
+diverged = '[  ](bg:overlay fg:red)[$behind_count](bg:overlay fg:yellow)[/](bg:overlay fg:highlight)[$ahead_count](bg:overlay fg:cyan) '
 behind = '[  $count ](bg:overlay fg:yellow)'
 
 [git_metrics]
