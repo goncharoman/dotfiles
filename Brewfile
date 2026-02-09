@@ -1,5 +1,6 @@
 brew "bottom"
 brew "cmctl"
+brew "cunit"
 brew "duckdb"
 brew "eza"
 brew "fastfetch"
