@@ -1,38 +1,49 @@
-LazyVim.commands.autocmd("python", {
-  event = { "BufWritePre" },
-  pattern = { "*.py" },
-  callback = function()
-    vim.notify("Ruff: Organize imports", "debug")
-    vim.lsp.buf.code_action { context = { only = { "source.fixAll.ruff" } }, apply = true }
-    -- if autoformat on save is disabled, uncomment it
-    -- vim.lsp.buf.format { async = vim.bo.filetype ~= "python" }
-  end,
-})
-
 return {
+
   {
     "linux-cultist/venv-selector.nvim",
     event = "VeryLazy",
     keys = {
-      { ",v", "<cmd>VenvSelect<cr>" }, -- Open picker on keymap
+      { "<leader>tp", "<cmd>VenvSelect<cr>" },
     },
-    opts = { -- this can be an empty lua table - just showing below for clarity.
-      search = {}, -- if you add your own searches, they go here.
-      options = {}, -- if you add plugin options, they go here.
+    dependencies = {
+      {
+        "folke/which-key.nvim",
+        opts = function(_, opts)
+          table.insert(
+            opts.spec,
+            { "<leader>tp", desc = "Python venv selector", icon = { icon = " ", color = "blue" } }
+          )
+        end,
+      },
+    },
+    opts = {
+      search = {
+        ["global"] = {
+          command = "fd '/bin/python$' $(pyenv prefix) --no-ignore-vcs --full-path --color never -E pkgs/ -E envs/ -L",
+        },
+      },
+      options = {},
     },
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    opts = { ensure_installed = { "ninja", "rst", "python", "toml" } },
+    opts = {
+      ensure_installed = { "ninja", "rst", "python", "toml" },
+    },
   },
+
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "mason-org/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = { "ruff", "basedpyright" },
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "ruff", "basedpyright" },
+        },
       },
     },
     opts = {
@@ -72,7 +83,7 @@ return {
         },
       },
       setup = {
-        ["ruff"] = function()
+        ruff = function()
           Snacks.util.lsp.on({ name = "ruff" }, function(_, client)
             -- Disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
@@ -81,16 +92,18 @@ return {
       },
     },
   },
-  {
-    "mason.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = { "mypy" },
-    },
-  },
+
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "mypy" },
+        },
+      },
+    },
     opts = {
       linters_by_ft = {
         python = { "mypy" },

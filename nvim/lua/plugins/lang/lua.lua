@@ -1,6 +1,7 @@
 vim.g.aliases = vim.tbl_extend("force", vim.g.aliases, { ["lua_ls"] = "lua-language-server" })
 
 return {
+
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
@@ -8,13 +9,18 @@ return {
       ensure_installed = { "lua", "luadoc", "yaml", "toml" },
     },
   },
+
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "mason-org/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = { "lua_ls" },
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = {
+            "lua-language-server",
+          },
+        },
       },
     },
     opts = {
@@ -45,29 +51,38 @@ return {
       },
     },
   },
-  {
-    "mason.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = { "stylua", "selene" },
-    },
-  },
+
   {
     "stevearc/conform.nvim",
     event = "VeryLazy",
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "stylua" },
+        },
+      },
+    },
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
       },
     },
   },
+
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
-    opts = {
-      linters_by_ft = {
-        lua = { "selene" },
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "selene" },
+        },
       },
+    },
+    opts = {
+      linters_by_ft = { lua = { "selene" } },
       linters = {
         selene = {
           condition = function(ctx) return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1] end,

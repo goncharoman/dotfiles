@@ -1,9 +1,13 @@
 return {
+
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    opts = { ensure_installed = { "cpp", "c", "objc", "cuda" } },
+    opts = {
+      ensure_installed = { "cpp", "c", "objc", "cuda" },
+    },
   },
+
   {
     "p00f/clangd_extensions.nvim",
     lazy = true,
@@ -13,7 +17,6 @@ return {
         inline = false,
       },
       ast = {
-        --These require codicons (https://github.com/microsoft/vscode-codicons)
         role_icons = {
           type = "",
           declaration = "",
@@ -34,13 +37,16 @@ return {
       },
     },
   },
+
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "mason-org/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = { "clangd" },
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "clangd" },
+        },
       },
     },
     opts = {
@@ -56,6 +62,7 @@ return {
             "compile_flags.txt",
             "configure.ac", -- AutoTools
             "Makefile",
+            "makefile",
             "configure.ac",
             "configure.in",
             "config.h.in",
@@ -92,11 +99,22 @@ return {
       },
     },
   },
+
   {
-    "mason.nvim",
+    "stevearc/conform.nvim",
     event = "VeryLazy",
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "clang-format" },
+        },
+      },
+    },
     opts = {
-      ensure_installed = { "codelldb" },
+      formatters_by_ft = {
+        c = { "clang-format" },
+      },
     },
   },
 }

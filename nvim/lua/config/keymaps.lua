@@ -12,9 +12,7 @@ keymap.set("x", "<Tab>", ">gv", { desc = "Indent line" })
 keymap.set("x", "<S-Tab>", "<gv", { desc = "Unindent line" })
 
 -- close current buffer
-keymap.set("n", "<leader>x", function()
-  Snacks.bufdelete()
-end, { desc = "Close buffer" })
+keymap.set("n", "<leader>x", function() Snacks.bufdelete() end, { desc = "Close buffer" })
 
 --  diagnostics/quicklist group
 keymap.set("n", "<leader>lx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
@@ -35,15 +33,11 @@ keymap.set(
 )
 keymap.set("n", "<leader>ll", function()
   local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
+  if not success and err then vim.notify(err, vim.log.levels.ERROR) end
 end, { desc = "Location List" })
 keymap.set("n", "<leader>lq", function()
   local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
+  if not success and err then vim.notify(err, vim.log.levels.ERROR) end
 end, { desc = "Quickfix List" })
 
 -- WARNING disable default mapping

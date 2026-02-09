@@ -1,5 +1,7 @@
 return {
 
+  { "mason-org/mason-lspconfig.nvim", enabled = false },
+
   {
     "nvim-mini/mini.surround",
     event = "VeryLazy",
@@ -40,7 +42,7 @@ return {
           ensure_installed = {
             "prettierd",
             "shfmt",
-            "lua-language-server",
+            "lua-language-server", -- lua-language-server@3.16.4 see https://github.com/folke/lazydev.nvim/issues/136
             "yaml-language-server",
             "bash-language-server",
             "json-lsp",
@@ -56,7 +58,6 @@ return {
     },
     opts = {
       servers = {
-        taplo = {},
         tinymist = {
           settings = {
             formatterMode = "typestyle",

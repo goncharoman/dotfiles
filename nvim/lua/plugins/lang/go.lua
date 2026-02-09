@@ -1,16 +1,22 @@
 return {
+
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    opts = { ensure_installed = { "go", "gomod", "gosum", "gowork" } },
+    opts = {
+      ensure_installed = { "go", "gomod", "gosum", "gowork" },
+    },
   },
+
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "mason-org/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = { "gopls" },
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "gopls" },
+        },
       },
     },
     opts = {
@@ -83,34 +89,39 @@ return {
       end,
     },
   },
-  {
-    "mason.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = { "goimports", "gofumpt", "gomodifytags", "impl", "iferr", "gotests" },
-    },
-  },
+
   {
     "stevearc/conform.nvim",
     event = "VeryLazy",
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "goimports", "gofumpt" },
+        },
+      },
+    },
     opts = {
       formatters_by_ft = {
         go = { "goimports", "gofumpt" },
       },
     },
   },
+
   {
     "olexsmir/gopher.nvim",
     event = "VeryLazy",
     ft = "go",
-    build = function()
-      if not require("lazy.core.config").spec.plugins["mason.nvim"] then
-        vim.print "Installing go dependencies..."
-        vim.cmd.GoInstallDeps()
-      end
-    end,
-    opts = {},
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "goimports", "gofumpt", "gomodifytags", "impl", "iferr", "gotests" },
+        },
+      },
+    },
   },
+
   {
     "nvim-mini/mini.icons",
     event = "VeryLazy",

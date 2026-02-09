@@ -35,6 +35,26 @@ return {
             hl["ErrorMsg"] = { fg = colors.red }
             hl["SnacksNotifierTitleError"] = { fg = colors.red }
             hl["SnacksNotifierIconError"] = { fg = colors.red }
+            hl["BufferLineFill"] = { bg = colors.bg_dark }
+            hl["BufferLineSeparator"] = { fg = colors.bg_dark, bg = colors.bg_dark1 }
+            hl["BufferLineSeparatorSelected"] = { fg = colors.bg_dark, bg = colors.bg }
+            hl["BufferLineSeparatorVisible"] = { fg = colors.bg_dark, bg = colors.bg }
+            hl["BufferLineBufferVisible"] = { fg = colors.fg_dark, bg = colors.bg, italic = true }
+            hl["BufferLineCloseButtonVisible"] = { fg = colors.fg_dark, bg = colors.bg, italic = true }
+            hl["BufferLineMiniIconsAzureInactive"] = { fg = colors.cyan, bg = colors.bg }
+            hl["DiagnosticVirtualTextError"] = { fg = utils.blend(colors.red, 0.6, colors.bg), italic = true }
+            hl["DiagnosticVirtualTextWarn"] = { fg = utils.blend(colors.yellow, 0.6, colors.bg), italic = true }
+            hl["DiagnosticVirtualTextInfo"] = { fg = utils.blend(colors.blue, 0.6, colors.bg), italic = true }
+            hl["DiagnosticVirtualTextHint"] = { fg = utils.blend(colors.cyan, 0.6, colors.bg), italic = true }
+            hl["MiniIconsCyanLight"] = { bg = utils.blend(colors.cyan, 0.1, colors.bg), fg = colors.cyan }
+            hl["MiniIconsBlueLight"] = { bg = utils.blend(colors.blue, 0.1, colors.bg), fg = colors.blue }
+            hl["MiniIconsOrangeLight"] = { bg = utils.blend(colors.orange, 0.1, colors.bg), fg = colors.orange }
+            hl["MiniIconsPurpleLight"] = { bg = utils.blend(colors.purple, 0.1, colors.bg), fg = colors.purple }
+            hl["MiniIconsYellowLight"] = { bg = utils.blend(colors.yellow, 0.1, colors.bg), fg = colors.yellow }
+            hl["MiniIconsAzureLight"] = { bg = utils.blend(colors.teal, 0.1, colors.bg), fg = colors.teal }
+            hl["MiniIconsGreyLight"] = { bg = utils.blend(colors.comment, 0.1, colors.bg), fg = colors.comment }
+            hl["MiniIconsRedLight"] = { bg = utils.blend(colors.red, 0.1, colors.bg), fg = colors.red }
+            hl["MiniIconsGreenLight"] = { bg = utils.blend(colors.green, 0.1, colors.bg), fg = colors.green }
           end
           opts.cache = true
           opts.plugins = {
@@ -129,50 +149,6 @@ return {
           },
         },
       }
-      LazyVim.color.hlset(
-        "DiagnosticVirtualTextError",
-        LazyVim.color.extand(
-          "DiagnosticVirtualTextError",
-          vim.tbl_extend(
-            "force",
-            LazyVim.color.trans("DiagnosticVirtualTextError", 0.75),
-            { italic = true, bg = "none" }
-          )
-        )
-      )
-      LazyVim.color.hlset(
-        "DiagnosticVirtualTextWarn",
-        LazyVim.color.extand(
-          "DiagnosticVirtualTextWarn",
-          vim.tbl_extend(
-            "force",
-            LazyVim.color.trans("DiagnosticVirtualTextWarn", 0.75),
-            { italic = true, bg = "none" }
-          )
-        )
-      )
-      LazyVim.color.hlset(
-        "DiagnosticVirtualTextInfo",
-        LazyVim.color.extand(
-          "DiagnosticVirtualTextInfo",
-          vim.tbl_extend(
-            "force",
-            LazyVim.color.trans("DiagnosticVirtualTextInfo", 0.75),
-            { italic = true, bg = "none" }
-          )
-        )
-      )
-      LazyVim.color.hlset(
-        "DiagnosticVirtualTextHint",
-        LazyVim.color.extand(
-          "DiagnosticVirtualTextHint",
-          vim.tbl_extend(
-            "force",
-            LazyVim.color.trans("DiagnosticVirtualTextHint", 0.75),
-            { italic = true, bg = "none" }
-          )
-        )
-      )
     end,
   },
 
@@ -195,6 +171,7 @@ return {
           { "<leader>s", group = "search" },
           { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
           { "<leader>l", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+          { "<leader>t", group = "tools", icon = { icon = " ", color = "blue" } },
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
@@ -299,8 +276,24 @@ return {
       picker = {
         sources = {
           explorer = {
+            prompt = " > ",
             title = "Explorer",
+            formatters = {
+              file = {
+                git_status_hl = false,
+              },
+            },
+            layout = {
+              preset = "select",
+              layout = {
+                backdrop = true,
+                height = 0.6,
+                width = 0.4,
+              },
+            },
+            auto_close = true,
             diagnostics = false,
+            jump = { close = true },
             ignored = {
               "**/.venv",
             },
@@ -317,7 +310,23 @@ return {
               ".github",
               ".dockerignore",
               ".luarc.json",
+              ".github",
+              ".devcontainer",
             },
+          },
+        },
+        icons = {
+          git = {
+            enabled = true,
+            addedd = "",
+            deleted = "",
+            modified = "󰜥",
+            remaned = "", -- optional: 
+            staged = "", -- optional: 
+            conflict = "", -- optional: 
+            ignored = "", -- optional: 
+            unstaged = "", -- optional: 
+            untracked = "", -- optional: 
           },
         },
       },
@@ -329,30 +338,14 @@ return {
     event = "VeryLazy",
     opts = function(_, opts)
       opts.options.themable = true
-      -- opts.options.always_show_bufferline = true
       opts.options.separator_style = "slant"
       opts.options.enforce_regular_tabs = true
       opts.options.diagnostics = false
       opts.options.offsets = {
         {
           filetype = "snacks_layout_box",
-          -- text = "Explorer",
           highlight = "SnacksPickerInputBorder",
           text_align = "center",
-        },
-      }
-      opts.highlights = {
-        fill = {
-          bg = LazyVim.color.hlcolor("SnacksNormalNC", "bg"),
-        },
-        separator = {
-          fg = LazyVim.color.hlcolor("SnacksNormalNC", "bg"),
-        },
-        separator_visible = {
-          fg = LazyVim.color.hlcolor("SnacksNormalNC", "bg"),
-        },
-        separator_selected = {
-          fg = LazyVim.color.hlcolor("SnacksNormalNC", "bg"),
         },
       }
     end,
@@ -401,7 +394,7 @@ return {
               done = "",
               separator = ",",
             },
-            color = function() return { fg = LazyVim.color.hlcolor("lualine_b_normal", "fg") } end,
+            color = function() return { fg = Snacks.util.color("lualine_b_normal", "fg") } end,
           },
           diagnostics = {
             "diagnostics",
@@ -433,7 +426,7 @@ return {
               end
 
               local linters = {}
-              for _, linter in pairs(LazyVim.lint.linters()) do
+              for _, linter in pairs(LazyVim.misc.linters()) do
                 table.insert(linters, vim.g.aliases[linter] or linter)
               end
 
@@ -453,7 +446,7 @@ return {
 
               return msg
             end,
-            color = function() return { fg = LazyVim.color.hlcolor("lualine_b_normal", "fg") } end,
+            color = function() return { fg = Snacks.util.color("lualine_b_normal", "fg") } end,
             draw_empty = false,
           },
         },
@@ -502,82 +495,12 @@ return {
   },
 
   {
-    "nvim-mini/mini.icons",
-    event = "VeryLazy",
-    opts = function(_, _)
-      local bg = LazyVim.color.hlcolor("Normal", "bg")
-      LazyVim.color.hlset(
-        "MiniIconsCyanLight",
-        LazyVim.color.extand(
-          "MiniIconsCyan",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsCyan", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsBlueLight",
-        LazyVim.color.extand(
-          "MiniIconsBlue",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsBlue", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsOrangeLight",
-        LazyVim.color.extand(
-          "MiniIconsOrange",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsOrange", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsPurpleLight",
-        LazyVim.color.extand(
-          "MiniIconsPurple",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsPurple", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsYellowLight",
-        LazyVim.color.extand(
-          "MiniIconsYellow",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsYellow", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsAzureLight",
-        LazyVim.color.extand(
-          "MiniIconsAzure",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsAzure", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsGreyLight",
-        LazyVim.color.extand(
-          "MiniIconsGrey",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsGrey", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsRedLight",
-        LazyVim.color.extand(
-          "MiniIconsRed",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsRed", "fg"), bg, 0.15) }
-        )
-      )
-      LazyVim.color.hlset(
-        "MiniIconsGreenLight",
-        LazyVim.color.extand(
-          "MiniIconsGreen",
-          { bg = LazyVim.color.blend(LazyVim.color.hlcolor("MiniIconsGreen", "fg"), bg, 0.15) }
-        )
-      )
-    end,
-  },
-
-  {
     "saghen/blink.cmp",
     event = "VeryLazy",
     opts = function(_, opts)
       local mini = require "mini.icons"
 
+      opts.cmdline = { enabled = false }
       opts.keymap = {
         preset = "enter",
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
@@ -585,11 +508,20 @@ return {
       }
       opts.fuzzy = {
         implementation = "rust",
-        sorts = { "score", "sort_text", "kind", "label" },
+        sorts = { "exact", "score", "sort_text" },
+      }
+      opts.completion.documentation.window = {
+        min_width = 60,
+        max_width = 120,
+        border = "rounded",
       }
       opts.completion.menu.draw = {
-        padding = { 1, 2 },
-        columns = { { "label", "label_description", gap = 10 }, { "kind_icon", "kind", "source_name" } },
+        padding = { 0, 1 },
+        columns = {
+          { "kind_icon" },
+          { "label", "label_description" },
+          { "kind" },
+        },
         components = {
           kind_icon = {
             text = function(ctx)
@@ -598,14 +530,21 @@ return {
             end,
             highlight = function(ctx)
               local _, hl, _ = mini.get("lsp", ctx.kind)
-              return hl
+              return hl .. "Light"
             end,
           },
           kind = {
+            text = function(ctx) return " " .. ctx.kind end,
             highlight = function(ctx)
               local _, hl, _ = mini.get("lsp", ctx.kind)
               return hl
             end,
+          },
+          label_description = {
+            highlight = "NonText",
+          },
+          label = {
+            width = { min = 30, max = 60 },
           },
         },
       }

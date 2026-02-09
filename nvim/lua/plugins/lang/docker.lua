@@ -11,18 +11,24 @@ vim.filetype.add {
 }
 
 return {
+
   {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
-    opts = { ensure_installed = { "dockerfile" } },
+    opts = {
+      ensure_installed = { "dockerfile" },
+    },
   },
+
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "mason-org/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = { "dockerls", "docker_compose_language_service" },
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "dockerfile-language-server", "docker-compose-language-service" },
+        },
       },
     },
     opts = {
@@ -32,14 +38,18 @@ return {
       },
     },
   },
-  {
-    "mason.nvim",
-    event = "VeryLazy",
-    opts = { ensure_installed = { "hadolint" } },
-  },
+
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
+    dependencies = {
+      {
+        "mason.nvim",
+        opts = {
+          ensure_installed = { "hadolint" },
+        },
+      },
+    },
     opts = {
       linters_by_ft = {
         dockerfile = { "hadolint" },
