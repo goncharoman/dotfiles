@@ -38,8 +38,8 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = {
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
             "prettierd",
             "shfmt",
             "lua-language-server", -- lua-language-server@3.16.4 see https://github.com/folke/lazydev.nvim/issues/136
@@ -48,8 +48,8 @@ return {
             "json-lsp",
             "taplo",
             "tinymist",
-          },
-        },
+          })
+        end,
       },
       {
         "b0o/SchemaStore.nvim",

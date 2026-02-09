@@ -16,9 +16,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "buf" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "buf",
+          })
+        end,
       },
     },
     opts = {
@@ -34,9 +36,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "buf" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "buf",
+          })
+        end,
       },
     },
     opts = {

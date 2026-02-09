@@ -44,14 +44,15 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "clangd" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "clangd",
+          })
+        end,
       },
     },
     opts = {
       servers = {
-        -- Ensure mason installs the server
         clangd = {
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
           keys = {
@@ -106,9 +107,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "clang-format" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "clang-format",
+          })
+        end,
       },
     },
     opts = {

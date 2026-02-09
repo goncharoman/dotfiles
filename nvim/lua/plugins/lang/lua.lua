@@ -16,11 +16,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = {
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
             "lua-language-server",
-          },
-        },
+          })
+        end,
       },
     },
     opts = {
@@ -58,9 +58,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "stylua" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "stylua",
+          })
+        end,
       },
     },
     opts = {
@@ -76,9 +78,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "selene" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "selene",
+          })
+        end,
       },
     },
     opts = {
