@@ -27,9 +27,6 @@ set -gx GOENV_GOPATH_PREFIX $XDG_DATA_HOME/go
 set -gx GOENV_RC_FILE $XDG_CONFIG_HOME/goenv/goenvrc
 set -gx GOENV_PATH_ORDER front
 
-# ghcup setup
-set -gx GHCUP_USE_XDG_DIRS true
-
 # npm setup
 set -gx NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
 set -gx NPM_CONFIG_INIT_MODULE $XDG_CONFIG_HOME/npm/config/npm-init.js
@@ -62,9 +59,6 @@ set -gx W3M_DIR $XDG_DATA_HOME/w3m
 set -gx POETRY_HOME $XDG_DATA_HOME/pypoetry
 set -gx POETRY_CONFIG_DIR $XDG_CONFIG_HOME/pypoetry
 set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
-
-# stack (haskell) setup
-set -gx STACK_XDG true
 
 # eza (replacement ls) setup
 set -gx EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza
