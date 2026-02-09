@@ -14,9 +14,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "gopls" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "gopls",
+          })
+        end,
       },
     },
     opts = {
@@ -96,9 +98,12 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "goimports", "gofumpt" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "goimports",
+            "gofumpt",
+          })
+        end,
       },
     },
     opts = {
@@ -115,9 +120,16 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "goimports", "gofumpt", "gomodifytags", "impl", "iferr", "gotests" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "goimports",
+            "gofumpt",
+            "gomodifytags",
+            "impl",
+            "iferr",
+            "gotests",
+          })
+        end,
       },
     },
   },

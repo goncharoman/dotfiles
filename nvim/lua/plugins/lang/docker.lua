@@ -26,9 +26,12 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "dockerfile-language-server", "docker-compose-language-service" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "dockerfile-language-server",
+            "docker-compose-language-service",
+          })
+        end,
       },
     },
     opts = {
@@ -45,9 +48,11 @@ return {
     dependencies = {
       {
         "mason.nvim",
-        opts = {
-          ensure_installed = { "hadolint" },
-        },
+        opts = function(_, opts)
+          LazyVim.misc.lstmerge(opts.ensure_installed, {
+            "hadolint",
+          })
+        end,
       },
     },
     opts = {

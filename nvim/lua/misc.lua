@@ -35,4 +35,15 @@ M.autocmd = function(group, opts)
   })
 end
 
+---Merge two lists
+---@param dst any[] destination list
+---@param src any[] source list
+---@return any[]
+M.lstmerge = function(dst, src)
+  for _, item in ipairs(src) do
+    if not vim.list_contains(dst, item) then table.insert(dst, item) end
+  end
+  return dst
+end
+
 return M
