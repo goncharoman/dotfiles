@@ -1,4 +1,5 @@
 tap "slp/krunkit"
+brew "austin"
 brew "bottom"
 brew "cmctl"
 brew "cunit"
