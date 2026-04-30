@@ -54,7 +54,7 @@ return {
     opts = {
       servers = {
         clangd = {
-          filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
           keys = {
             { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
