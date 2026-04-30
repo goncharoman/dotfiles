@@ -5,6 +5,7 @@ title = "ghostty"
 
 theme = tokyonight
 macos-icon = custom
+macos-custom-icon = ~/.config/ghostty/Ghostty.icns
 
 background-opacity = 1
 background-blur = true
