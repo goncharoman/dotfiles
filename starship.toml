@@ -1,13 +1,6 @@
 command_timeout = 5000
 palette = "tokyonight"
 
-[time]
-disabled = true
-format = "[](fg:overlay)[ $time 󰴈 ]($style)[](fg:overlay) "
-style = "bg:overlay fg:red"
-time_format = "%I:%M%P"
-use_12hr = true
-
 [username]
 disabled = true
 format = "[](fg:overlay)[ 󰧱 $user ]($style)[](fg:overlay) "
@@ -16,9 +9,9 @@ style_root = "bg:overlay fg:magenta"
 style_user = "bg:overlay fg:magenta"
 
 [character]
-success_symbol = "[](cyan)"
+success_symbol = "[](green)"
 error_symbol = "[](red)"
-vimcmd_symbol = "[](cyan)"
+vimcmd_symbol = "[](green)"
 vimcmd_replace_one_symbol = "[](magenta)"
 vimcmd_replace_symbol = "[](magenta)"
 vimcmd_visual_symbol = "[](yellow)"
