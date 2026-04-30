@@ -270,9 +270,9 @@ symbol = " "
 
 [python]
 disabled = false
-format = "[](fg:overlay)[ via](bg:overlay fg:text)[ $symbol($version )]($style)[](fg:overlay) "
+format = '[](fg:overlay)[ via](bg:overlay fg:text)[ ${symbol}${version}]($style)[( [from](bg:overlay fg:text) $virtualenv) ](bg:overlay fg:yellow)($style)[](fg:overlay) '
 style = "bg:overlay fg:blue"
-pyenv_version_name = true
+pyenv_version_name = false
 symbol = " "
 
 [rlang]

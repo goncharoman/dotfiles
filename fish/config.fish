@@ -75,7 +75,7 @@ set -gx EDITOR nvim
 set -gx PAGER 'less -+FX -S'
 
 # this fixed an issue with displaying Python venv in Starship
-set -gx VIRTUAL_ENV_DISABLE_PROMPT true
+# set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 
 # initialize tools (setup shell)
 $HOMEBREW_HOME/bin/brew shellenv | source
