@@ -58,6 +58,7 @@ return {
     },
     opts = {
       servers = {
+        taplo = {},
         tinymist = {
           settings = {
             formatterMode = "typestyle",
