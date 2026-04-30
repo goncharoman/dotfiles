@@ -4,7 +4,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
     opts = {
-      ensure_installed = { "go", "gomod", "gosum", "gowork" },
+      ensure_installed = { "go", "gomod", "gosum" },
     },
   },
 
@@ -140,9 +140,6 @@ return {
     opts = {
       file = {
         [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
-      },
-      filetype = {
-        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
       },
     },
   },
