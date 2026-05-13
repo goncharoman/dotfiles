@@ -1,0 +1,3 @@
+set -gx POETRY_HOME $XDG_DATA_HOME/pypoetry
+set -gx POETRY_CONFIG_DIR $XDG_CONFIG_HOME/pypoetry
+set -gx POETRY_CACHE_DIR $XDG_CACHE_HOME/pypoetry
